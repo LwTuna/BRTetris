@@ -1,0 +1,12 @@
+body {
+    background-color: #efefef !important;
+}
+
+canvas { 
+   width: 35%;
+   height: 85vh;
+   left:30%;
+   top:10vh;
+   border : 1px solid;
+    position: fixed;
+}
