@@ -1,6 +1,7 @@
 //Game
 const rows = 20,columns=10;
 
+var loggedIn = false;
 
 function init(){
 	if(shapes.length <=0){
@@ -11,11 +12,12 @@ function init(){
 	
 }
 //Renderer
-var canvas = document.getElementById('canvas');
-var ctx = canvas.getContext('2d');
+
 
 
 function render(response){
+	var canvas = document.getElementById('canvas');
+	var ctx = canvas.getContext('2d');
 	var width = canvas.width;
 	var height = canvas.height;
 	var cellHeight = height/rows,cellWidth = width/columns;
@@ -25,7 +27,7 @@ function render(response){
 	
 	 for ( var x = 0; x < columns; x++ ) {
 	        for ( var y = 0; y < rows; y++ ) {
-	        	if(arr[y][x] ==1){
+	        	if(arr[x][y] ==1){
 	        		ctx.fillRect(x*cellWidth,y*cellHeight,cellWidth,cellHeight);
 	        	}else{
 	        	}
@@ -33,31 +35,32 @@ function render(response){
 	 }
 }
 
-var lastRequest = 0;
 //Input
 var sessionId = 1;
 
-setInterval(() => {
-	var request = {};
-	request.tag = "getCurrentBoard";
-	request.id = sessionId;
-	sendRequest(request, render);
-}, 50);
+
 
 document.body.onkeydown = function( e ) {
+	if(!loggedIn) return;
     var keys = {
-        37: 'left',	//arrow lefts
+        37: 'left',	//arrow left
         39: 'right', //Arrow Right
         40: 'down',   //Arrow Down
         38: 'rotate', //Arrow Up
         32: 'drop'   //Spacebar
     };
     
-    if(keys[e.keyCode] != 'undefined'){
+    if(keys[e.keyCode] != 'undefined' && (e.keyCode == 37 ||e.keyCode == 39 ||e.keyCode == 40 ||e.keyCode == 38 ||e.keyCode == 32)){
     	var obj = {};
     	obj.tag = "input";
+    	obj.id = sessionId;
     	obj.key = keys[e.keyCode];
-    	sendRequest(obj,printAnsw);
+    	sendRequest(obj,function(obj){
+    		var request = {};
+    		request.tag = "getCurrentBoard";
+    		request.id = sessionId;
+    		sendRequest(request, render);
+    	});
     }
 }
 
@@ -86,3 +89,32 @@ function printAnsw(msg){
 	console.log(msg);
 }
 
+function login(){
+    var usr = "test";//document.getElementById("usr").value;
+    var pwd = "test";//document.getElementById("pwd").value;
+    var req = {};
+    req.tag = "login";
+    req.email = "usr";
+    req.password = "pwd";
+    sendRequest(req, function(obj){
+    	if (obj.succes) {
+            loggedIn=true;
+            $(".container.content").load("game.html");	
+        } else {
+            alert('Login Error');
+        }
+    });
+   
+}
+
+$( document ).ready(function() {
+	$(".container.content").load("login.html");	
+});
+
+setInterval(() => {
+	if(!loggedIn) return;
+	var request = {};
+	request.tag = "getCurrentBoard";
+	request.id = sessionId;
+	sendRequest(request, render);
+}, 50);

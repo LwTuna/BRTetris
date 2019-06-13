@@ -10,33 +10,48 @@ public class Board {
 	private final int width = 10;
 	private final int height = 20;
 	
+	private int currentX = 5,currentY = 0;
+	
 	private int[][] table;
 	
 	private List<Shape> nextShapes = new ArrayList<Shape>();
 	
 	public Board() {
-		table = new int[height][width];
-		for(int y=0;y<height;y++) {
-			table[y] = new int[width];
-			for(int x=0;x<width;x++) {
-				table[y][x] = 0;
+		table = new int[width][height];
+		for(int x=0;x<width;x++) {
+			table[x] = new int[height];
+			for(int y=0;y<height;y++) {
+				table[x][y] = 0;
 			}
 		}
-		for(int i=0;i<3;i++) {
-			nextShapes.add(Shape.shapes.get((int) Math.round(Math.random()*(Shape.shapes.size()-1))));
-		}
+		table[currentX][currentY] = 1;
+		
 	}
 	
 	
 	public JSONArray toJSON() {
-		JSONArray rows = new JSONArray();
-		for(int y=0;y<height;y++) {
-			JSONArray row = new JSONArray();
-			for(int x=0;x<width;x++) {
-				row.put(table[y][x]);
+		JSONArray columns = new JSONArray();
+		for(int x=0;x<width;x++) {
+			JSONArray column = new JSONArray();
+			for(int y=0;y<height;y++) {
+				column.put(table[x][y]);
 			}
-			rows.put(row);
+			columns.put(column);
 		}
-		return rows;
+		return columns;
 	}
+	
+	public boolean move(String direction) {
+		table[currentX][currentY] = 0;
+		switch (direction){
+		case "left": currentX -=1;break;
+		case "right": currentX +=1;break;
+		case "down": currentY +=1;break;
+		case "rotate": ;break;
+		case "drop": currentY = 19;;break;
+		}
+		table[currentX][currentY] = 1;
+		return true;
+	}
+	
 }

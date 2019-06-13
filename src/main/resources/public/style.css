@@ -1,7 +1,11 @@
 body {
-    background-color: #efefef !important;
+    background-image : url("res/bg.png");
+	background-repeat : repeat;
 }
 
+.container.content{
+	
+}
 canvas { 
    width: 35%;
    height: 85vh;
@@ -9,4 +13,5 @@ canvas {
    top:10vh;
    border : 1px solid;
     position: fixed;
+    background-color : white;
 }
