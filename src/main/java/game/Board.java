@@ -11,10 +11,13 @@ public class Board {
 	private final int height = 20;
 	
 	private int currentX = 5,currentY = 0;
+	private ShapePrefab currentShape;
+	
 	
 	private int[][] table;
 	
-	private List<Shape> nextShapes = new ArrayList<Shape>();
+	
+	private List<ShapePrefab> nextShapes = new ArrayList<ShapePrefab>();
 	
 	public Board() {
 		table = new int[width][height];
@@ -25,7 +28,7 @@ public class Board {
 			}
 		}
 		table[currentX][currentY] = 1;
-		
+		currentShape = ShapePrefab.shapes.get(0);
 	}
 	
 	

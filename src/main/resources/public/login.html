@@ -1,8 +1,20 @@
 <body>
-Login Placeholder
-
-<button onClick="login()">Login</button>
-
-
-
+    <script type="text/javascript" src="js/login.js"></script>
+    <div class="innercontent login" id="logi">
+        <div class="loginform">
+            
+            <div class="form-group">
+                <label type="text" id="loginerr">Falsche Mailadresse oder Passwort!</label>
+                <label for="usr"><b>Mailadresse</b></label>
+                <input type="text" class="form-control" id="usr">
+            </div>
+            <div class="form-group">
+                <label for="pwd"><b>Passwort</b></label>
+                <input type="password" class="form-control" id="pwd">
+            </div>
+            <button type="button" class="btn snd" onclick="login()">Login<i class="fas fa-check"></i></button>
+            <a href="#" class="reglink" onclick="openRegisterMenu()">Hier registrieren</a>
+        </div>
+    </div>
+    
 </body>

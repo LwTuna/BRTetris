@@ -55,6 +55,19 @@ public class App {
 			container.put("sessionId", Math.random());
 			return container;
 		});
+		processors.put("register",(JSONObject obj) ->{
+			String email = obj.getString("email");
+			String password = obj.getString("password");
+			String user = obj.getString("user");
+			JSONObject container = new JSONObject();
+			try {
+				container.put("succes", DatabaseManager.register(email, user, password));
+			} catch (Exception e) {
+				e.printStackTrace();
+				container.put("succes",false);
+			} 
+			return container;
+		});
 	}
 
 	private static String processEvent(String decode) {

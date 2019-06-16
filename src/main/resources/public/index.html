@@ -7,16 +7,51 @@
 </head>
 <body>
 	
-  	<div class="container content">
-            
-            
-            
-    </div>
+  	
   	
 	
-	<script src="https://code.jquery.com/jquery-1.9.1.min.js"></script>
-    <script type="text/javascript" src="js/jquery-3.4.1.js"></script> 
-  	<script type="text/javascript" src="js/Javascript.js"></script>
+    
+    
+  	<!-- Eigene Style CSS -->     
+    <link rel=stylesheet type="text/css" href="style.css">
+
+    <!-- Bootstrap 4 und JS zum Offline arbeiten -->
+    <link rel=stylesheet type="text/css" href="js/lib/bootstrap-4.3.1-dist/css/bootstrap.css">   
+    <script type="text/javascript" src="js/lib/jquery-3.4.1.js"></script> <!-- Erst Bootstrap.js, JQuery und dann popper.js -->
+    <script type="text/javascript" src="js/lib/bootstrap-4.3.1-dist/js/bootstrap.bundle.js"></script> <!-- im bundler ist popper mit drin -->
+
+	<script type="text/javascript" src="js/Javascript.js"></script> 
+
+
+	<div class="header">        
+    </div>
+       
+        <!-- Navbar -->
+        <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+          <a class="navbar-brand" href="index.html" data-toggle="tooltip" title="Startseite">BR Tetris</a> 
+           <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="collapsibleNavbar">
+            <ul class="navbar-nav">
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="shlogin" data-toggle="tooltip" title="Placeholder">Placeholder<i class="fas fa-sign-in-alt"></i></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#" id="shsettings" data-toggle="tooltip" title="Placeholder">Placeholder<i class="fas fa-tasks"></i></a>
+                </li>  
+            </ul>
+          </div>  
+        </nav>
+        <!-- Navbar Ende-->
+        
+        <!-- Content -->
+        
+        <div class="container content">
+            
+        </div>    
+
+
 
 </body>
 </html>

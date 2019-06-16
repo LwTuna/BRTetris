@@ -7,11 +7,44 @@ body {
 	
 }
 canvas { 
-   width: 35%;
+   width: 30%;
    height: 85vh;
    left:30%;
    top:10vh;
    border : 1px solid;
     position: fixed;
     background-color : white;
+}
+
+.navbar, .nav-link {
+    font-family: Verdana;
+/*    text-align: center;*/
+    font-size: 0.9em !important;
+    color: gainsboro;
+}
+
+.fas.fa-plus.nb {
+    font-size: 20px; 
+    color: #80ba24;
+}
+
+.fas.fa-tasks, .fas.fa-sign-in-alt, .fas.fa-sign-out-alt {
+    font-size: 20px;
+    color: #fff !important;
+}
+
+.innercontent.login {
+    height: 14.5em;
+    padding-left: 0.3em;
+    padding-right: 0.3em;
+    max-width: 470px !important;
+}
+.btn.snd {
+    /* Button für Senden */
+    background-color: #ba9f24;
+    width: 5em;
+    height: 2.2em;
+    margin-right: 0.5em;
+    margin-bottom: 0.25em;
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 3px 20px 0 rgba(0,0,0,0.19);
 }

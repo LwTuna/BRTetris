@@ -82,7 +82,7 @@ public class DatabaseManager {
 	public static boolean login(String email,String password) throws SQLException {
 		ResultSet rs= executeStatement("Select * from user where email = '"+email+"' AND password = '"+password+"';");
 		
-		if(!rs.next()) {
+		if(rs.next()) {
 			return true;
 		}else {
 			
@@ -107,6 +107,15 @@ public class DatabaseManager {
 	}
 	
 	
-
+	public static boolean register(String email,String username,String password) {
+		String statement = "INSERT into user(email,password ,username ) VALUES ('"+email+"','"+password+"','"+username+"')";
+		try {
+			executeUpdate(statement);
+		}catch(Exception e) {
+			e.printStackTrace();
+			return false;
+		}
+		return true;
+	}
 	
 }
