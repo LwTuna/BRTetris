@@ -83,7 +83,7 @@ public class Shape {
 		for(int x=0;x<4;x++) {
 			for(int y=0;y<4;y++) {
 				if(prefab.getTables()[potRotation][x][y] !=0) {
-					if(potX+x<0 || potX+x>9 || potY+y<0 || potY+y>19) {
+					if(potX+x<0 || potX+x>=10 || potY+y<0 || potY+y>=20) {
 						return true;
 					}
 						
@@ -103,6 +103,13 @@ public class Shape {
 		}
 		
 		return board;
+	}
+
+	public boolean canBeCreated(int[][] board) {
+		if(intersects(x, y, rotation, board)) {
+			return false;
+		}
+		return true;
 	}
 	
 }

@@ -46,6 +46,7 @@ public class App {
 			JSONObject container = new JSONObject();
 			container.put("tag", "board");
 			container.put("rows", boards.get(obj.getInt("id")).toJSON());
+			container.put("gameOver", boards.get(obj.getInt("id")).isGameOver());
 			return container;
 		});
 		processors.put("login", (JSONObject obj) ->{

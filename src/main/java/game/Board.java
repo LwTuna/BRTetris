@@ -12,7 +12,7 @@ public class Board implements Runnable{
 	
 	
 	private Shape currentShape;
-	
+	private boolean gameOver = false;
 	
 	private int[][] table;
 	
@@ -30,11 +30,36 @@ public class Board implements Runnable{
 				table[x][y] = 0;
 			}
 		}
-		currentShape = new Shape(ShapePrefab.shapes.get(0));
-		table = currentShape.createShapeInBoard(table);
+		for(int i=0;i<3;i++) {
+			nextShapes.add(ShapePrefab.shapes.get((int) (Math.random()*ShapePrefab.shapes.size())));
+		}
+		createNewShape();
+		
 	}
 	
+	public void createNewShape() {
+		
+		currentShape = new Shape(nextShapes.get(0));
+		nextShapes.remove(0);
+		nextShapes.add(ShapePrefab.shapes.get((int) (Math.random()*ShapePrefab.shapes.size())));
+		if(currentShape.canBeCreated(table)) {
+			table = currentShape.createShapeInBoard(table);
+		}else {
+			gameOver();
+		}
+		
+	}
 	
+	private void gameOver() {
+		gameOver = true;
+		stop();
+		
+	}
+	
+	public boolean isGameOver() {
+		return gameOver;
+	}
+
 	public JSONArray toJSON() {
 		JSONArray columns = new JSONArray();
 		for(int x=0;x<width;x++) {
@@ -48,6 +73,8 @@ public class Board implements Runnable{
 	}
 	
 	public boolean move(String direction) {
+		if(!running)
+			return false;
 		if(currentShape.canMove(direction, table)) {
 			table = currentShape.move(direction, table);
 			
@@ -79,18 +106,56 @@ public class Board implements Runnable{
 	public void run() {
 		
 		while(running) {
-			if(currentShape.canMove("down", table)) {
-				table = currentShape.move("down", table);
+			if(move("down")) {
 				try {
 					Thread.sleep(700);
 				} catch (InterruptedException e) {
 					e.printStackTrace();
 				}
 			}else {
-				//TODO create new shape
+				table=currentShape.createShapeInBoard(table);
+				
+				List<Integer> rowsCompleted = checkForRows();
+				if(!rowsCompleted.isEmpty()) {
+					clearRows(rowsCompleted);
+					//TODO add rows add enemys
+				}
+				createNewShape();
 			}
 		}
 		
+	}
+
+	private void clearRows(List<Integer> rowsCompleted) {
+		for(Integer i:rowsCompleted) {
+			clearRow(i);
+			for(int y=i-1;y>=0;y--) {
+				moveRowDown(y);
+			}
+		}
+	}
+	private void moveRowDown(int row) {
+		for(int x=0;x<width;x++) {
+			table[x][row+1] = table[x][row];
+		}
+		clearRow(row);
+	}
+	private void clearRow(int row) {
+		for(int x=0;x<width;x++) {
+			table[x][row] = 0;
+		}
+	}
+
+	private List<Integer> checkForRows() {
+		List<Integer> rows = new ArrayList<Integer>();
+		outer:for(int y=0;y<height;y++) {
+			for(int x=0;x<width;x++) {
+				if(table[x][y]==0)
+					continue outer;
+			}
+			rows.add(y);
+		}
+		return rows;
 	}
 	
 }

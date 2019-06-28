@@ -38,6 +38,10 @@ function render(response){
 	        	}
 	        }
 	 }
+	 if(response.gameOver){
+			ctx.font="30px Verdana";
+			ctx.fillText("Game Over!",0+width/10,height/2);
+	 }
 }
 
 document.body.onkeydown = function( e ) {
