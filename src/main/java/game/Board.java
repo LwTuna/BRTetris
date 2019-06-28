@@ -5,16 +5,19 @@ import java.util.List;
 
 import org.json.JSONArray;
 
-public class Board {
+public class Board implements Runnable{
 
 	private final int width = 10;
 	private final int height = 20;
 	
-	private int currentX = 5,currentY = 0;
-	private ShapePrefab currentShape;
+	
+	private Shape currentShape;
 	
 	
 	private int[][] table;
+	
+	private Thread thread;
+	private boolean running = false;
 	
 	
 	private List<ShapePrefab> nextShapes = new ArrayList<ShapePrefab>();
@@ -27,8 +30,8 @@ public class Board {
 				table[x][y] = 0;
 			}
 		}
-		table[currentX][currentY] = 1;
-		currentShape = ShapePrefab.shapes.get(0);
+		currentShape = new Shape(ShapePrefab.shapes.get(0));
+		table = currentShape.createShapeInBoard(table);
 	}
 	
 	
@@ -45,16 +48,49 @@ public class Board {
 	}
 	
 	public boolean move(String direction) {
-		table[currentX][currentY] = 0;
-		switch (direction){
-		case "left": currentX -=1;break;
-		case "right": currentX +=1;break;
-		case "down": currentY +=1;break;
-		case "rotate": ;break;
-		case "drop": currentY = 19;;break;
+		if(currentShape.canMove(direction, table)) {
+			table = currentShape.move(direction, table);
+			
+			return true;
 		}
-		table[currentX][currentY] = 1;
-		return true;
+		return false;
+	}
+	
+	public synchronized void start() {
+		if(running)
+			return;
+		running = true;
+		thread = new Thread(this);
+		thread.start();
+		
+	}
+	public synchronized void stop() {
+		if(!running)
+			return;
+		running = false;
+		try {
+			thread.join();
+		}catch(Exception e) {
+			e.printStackTrace();
+		}
+	}
+
+	@Override
+	public void run() {
+		
+		while(running) {
+			if(currentShape.canMove("down", table)) {
+				table = currentShape.move("down", table);
+				try {
+					Thread.sleep(700);
+				} catch (InterruptedException e) {
+					e.printStackTrace();
+				}
+			}else {
+				//TODO create new shape
+			}
+		}
+		
 	}
 	
 }

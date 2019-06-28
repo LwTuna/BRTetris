@@ -30,12 +30,18 @@ public class App {
 		
 		processors.put("input",(JSONObject obj) ->{
 			JSONObject response = new JSONObject();
-			response.put("succes", boards.get(obj.getInt("id")).move(obj.getString("key")));
+			try {
+				response.put("succes", boards.get(obj.getInt("id")).move(obj.getString("key")));
+			}catch(Exception e) {
+				LogUI.print(e.getMessage());
+				response.put("succes", false);
+			}
 			return response;
 		});
 		processors.put("getCurrentBoard", (JSONObject obj) ->{
 			if(!boards.containsKey(obj.getInt("id"))) {
 				boards.put(obj.getInt("id"), new Board());
+				boards.get(obj.getInt("id")).start();
 			}
 			JSONObject container = new JSONObject();
 			container.put("tag", "board");
