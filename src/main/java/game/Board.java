@@ -157,5 +157,10 @@ public class Board implements Runnable{
 		}
 		return rows;
 	}
+
+	public void win() {
+		// TODO Auto-generated method stub
+		
+	}
 	
 }

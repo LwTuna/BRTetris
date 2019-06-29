@@ -13,13 +13,13 @@ function login(){
     sendRequest(req, function(obj){
     	if (obj.succes) {
             $(".container.content").load("game.html");
-            
+            sessionId = obj.sessionId;
         } else {
             alert('Login Error');
         }
     });
    
-}
+} 
 function openRegisterMenu(){
 	$(".container.content").load("register.html");	
 }
