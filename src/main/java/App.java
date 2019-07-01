@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import PacketProcessors.PacketProcessor;
 import game.Board;
+import game.ShapePrefab;
 import io.javalin.Javalin;
 
 public class App {
@@ -45,6 +46,7 @@ public class App {
 			}
 			JSONObject container = new JSONObject();
 			container.put("tag", "board");
+			container.put("started", boards.get(obj.getInt("id")).isRunning());
 			container.put("rows", boards.get(obj.getInt("id")).toJSON());
 			container.put("gameOver", boards.get(obj.getInt("id")).isGameOver());
 			return container;

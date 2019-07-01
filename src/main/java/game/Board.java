@@ -30,9 +30,9 @@ public class Board implements Runnable{
 				table[x][y] = 0;
 			}
 		}
-		for(int i=0;i<3;i++) {
-			nextShapes.add(ShapePrefab.shapes.get((int) (Math.random()*ShapePrefab.shapes.size())));
-		}
+		
+		nextShapes.add(ShapePrefab.shapes.get((int) (Math.random()*ShapePrefab.shapes.size())));
+		
 		createNewShape();
 		
 	}
@@ -104,7 +104,11 @@ public class Board implements Runnable{
 
 	@Override
 	public void run() {
-		
+		try {
+			Thread.sleep(700);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		while(running) {
 			if(move("down")) {
 				try {
@@ -161,6 +165,10 @@ public class Board implements Runnable{
 	public void win() {
 		// TODO Auto-generated method stub
 		
+	}
+
+	public boolean isRunning() {
+		return running;
 	}
 	
 }

@@ -5,8 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.sun.xml.internal.ws.api.pipe.NextAction;
-
 public class Lobby implements Runnable{
 
 	private final int size;
@@ -23,9 +21,13 @@ public class Lobby implements Runnable{
 	
 	public void join(int sessionId) {
 		boards.put(sessionId, new Board());
+		if(boards.size() >= size) {
+			start();
+		}
 	}
 	public void remove(int sessionId) {
 		boards.remove(sessionId);
+		
 	}
 	
 	public void start() {
@@ -75,7 +77,6 @@ public class Lobby implements Runnable{
 	}
 
 	public int getId() {
-		// TODO Auto-generated method stub
 		return id;
 	}
 	
