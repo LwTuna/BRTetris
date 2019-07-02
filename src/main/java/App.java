@@ -11,6 +11,7 @@ import org.json.JSONObject;
 
 import PacketProcessors.PacketProcessor;
 import game.Board;
+import game.Lobby;
 import game.ShapePrefab;
 import io.javalin.Javalin;
 
@@ -18,7 +19,8 @@ public class App {
 
 	private static Map<String,PacketProcessor> processors = new HashMap<String,PacketProcessor>();
 	
-	private static Map<Integer,Board> boards = new HashMap<Integer,Board>();
+	private static final int lobbySize = 1;
+	private static Lobby lobby = new Lobby(lobbySize);
 	
 	public static void main(String[] args) {
 		Javalin app = Javalin.create()
@@ -32,7 +34,7 @@ public class App {
 		processors.put("input",(JSONObject obj) ->{
 			JSONObject response = new JSONObject();
 			try {
-				response.put("succes", boards.get(obj.getInt("id")).move(obj.getString("key")));
+				response.put("succes", lobby.getBoards().get(obj.getInt("id")).move(obj.getString("key")));
 			}catch(Exception e) {
 				LogUI.print(e.getMessage());
 				response.put("succes", false);
@@ -40,15 +42,15 @@ public class App {
 			return response;
 		});
 		processors.put("getCurrentBoard", (JSONObject obj) ->{
-			if(!boards.containsKey(obj.getInt("id"))) {
-				boards.put(obj.getInt("id"), new Board());
-				boards.get(obj.getInt("id")).start();
+			if(!lobby.getBoards().containsKey(obj.getInt("id"))) {
+				lobby.join(obj.getInt("id"));
 			}
 			JSONObject container = new JSONObject();
 			container.put("tag", "board");
-			container.put("started", boards.get(obj.getInt("id")).isRunning());
-			container.put("rows", boards.get(obj.getInt("id")).toJSON());
-			container.put("gameOver", boards.get(obj.getInt("id")).isGameOver());
+			container.put("started", lobby.getBoards().get(obj.getInt("id")).isRunning());
+			container.put("rows", lobby.getBoards().get(obj.getInt("id")).toJSON());
+			container.put("gameOver", lobby.getBoards().get(obj.getInt("id")).isGameOver());
+			container.put("isWon", lobby.getBoards().get(obj.getInt("id")).isWon());
 			return container;
 		});
 		processors.put("login", (JSONObject obj) ->{

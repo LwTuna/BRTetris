@@ -20,6 +20,8 @@ public class Lobby implements Runnable{
 	}
 	
 	public void join(int sessionId) {
+		if(boards.size()>=size)
+			return;
 		boards.put(sessionId, new Board());
 		if(boards.size() >= size) {
 			start();
@@ -41,6 +43,7 @@ public class Lobby implements Runnable{
 		}
 	}
 	public void stop() {
+		resetLobby();
 		if(!running) {
 			return;
 		}
@@ -50,6 +53,14 @@ public class Lobby implements Runnable{
 		}catch(Exception e) {
 			e.printStackTrace();
 		}
+		
+		
+	}
+	private void resetLobby(){
+		for(Board board : boards.values()) {
+			board.stop();
+		}
+		boards = new HashMap<Integer,Board>();
 	}
 	
 	public void run() {
@@ -60,6 +71,7 @@ public class Lobby implements Runnable{
 					notGameOver.add(board);
 				}
 			}
+			System.out.println(notGameOver.size());
 			if(notGameOver.size() <=1) {
 				notGameOver.get(0).win();
 				stop();
@@ -78,6 +90,10 @@ public class Lobby implements Runnable{
 
 	public int getId() {
 		return id;
+	}
+
+	public Map<Integer, Board> getBoards() {
+		return boards;
 	}
 	
 }

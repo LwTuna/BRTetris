@@ -1,7 +1,10 @@
 const rows = 20,columns=10;
 
-var sessionId = 0;
+var sessionId = 100000;
 
+function getRandomInt(max) {
+	  return Math.floor(Math.random() * Math.floor(max));
+}
 
 var imgs = [];
 
@@ -41,6 +44,10 @@ function render(response){
 	 if(response.gameOver){
 			ctx.font="30px Verdana";
 			ctx.fillText("Game Over!",0+width/10,height/2);
+	 }
+	 if(response.isWon){
+			ctx.font="30px Verdana";
+			ctx.fillText("You win!",0+width/10,height/2);
 	 }
 }
 

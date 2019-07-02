@@ -19,6 +19,8 @@ public class Board implements Runnable{
 	private Thread thread;
 	private boolean running = false;
 	
+	private boolean won = false;
+	
 	
 	private List<ShapePrefab> nextShapes = new ArrayList<ShapePrefab>();
 	
@@ -33,7 +35,7 @@ public class Board implements Runnable{
 		
 		nextShapes.add(ShapePrefab.shapes.get((int) (Math.random()*ShapePrefab.shapes.size())));
 		
-		createNewShape();
+		
 		
 	}
 	
@@ -88,10 +90,12 @@ public class Board implements Runnable{
 			return;
 		running = true;
 		thread = new Thread(this);
+		createNewShape();
 		thread.start();
 		
 	}
 	public synchronized void stop() {
+		System.out.println("stop");
 		if(!running)
 			return;
 		running = false;
@@ -163,12 +167,15 @@ public class Board implements Runnable{
 	}
 
 	public void win() {
-		// TODO Auto-generated method stub
-		
+		won = true;
 	}
 
 	public boolean isRunning() {
 		return running;
+	}
+
+	public boolean isWon() {
+		return won;
 	}
 	
 }

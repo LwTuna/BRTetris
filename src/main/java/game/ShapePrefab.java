@@ -26,7 +26,7 @@ public class ShapePrefab {
 	
 	public ShapePrefab(String url,String name,int startX,int startY,int colorId,int startRotation) {
 		this.name = name;
-		this.startX = startX;
+		this.startX = startX-2;
 		this.startY = startY;
 		this.colorId = colorId;
 		this.startRotation = startRotation;
@@ -38,7 +38,6 @@ public class ShapePrefab {
 			while((line = reader.readLine())!=null) {
 				String[] split = line.split("\\s+");
 				int currentShape = currentLine/4;
-				System.out.println(currentLine+"/4 = "+currentShape);
 				for(int i = 0;i<4;i++) {
 					
 					this.tables[currentShape][i][currentLine-(currentShape*4)] = Integer.parseInt(split[i]);
