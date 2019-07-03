@@ -1,3 +1,4 @@
+package main;
 
 
 import java.sql.Connection;
@@ -83,29 +84,15 @@ public class DatabaseManager {
 		ResultSet rs= executeStatement("Select * from user where email = '"+email+"' AND password = '"+password+"';");
 		
 		if(rs.next()) {
+			rs.close();
 			return true;
 		}else {
-			
+			rs.close();
 			return false;
 		}
 		
 		
 	}
-	private static String getUsername(int userId) throws SQLException {
-		ResultSet rs = executeStatement("Select * from user where id = '"+userId+"';");
-		if(rs.next()) {
-			return rs.getString("username");
-		}else {
-			throw new DatabaseException("User Id = "+userId+" not found");
-		}
-	}
-	private static String getCurrentTime() {
-		  SimpleDateFormat sdfDate = new SimpleDateFormat("dd-MM-yyyy HH:mm:ss");//dd/MM/yyyy
-		    Date now = new Date();
-		    String strDate = sdfDate.format(now);
-		    return strDate;
-	}
-	
 	
 	public static boolean register(String email,String username,String password) {
 		String statement = "INSERT into user(email,password ,username ) VALUES ('"+email+"','"+password+"','"+username+"')";

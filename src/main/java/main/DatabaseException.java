@@ -1,3 +1,4 @@
+package main;
 
 /**
  * A custom exception thrown when a Error in database request occurs

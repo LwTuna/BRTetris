@@ -1,0 +1,2 @@
+lobbySize=2
+debugMode=false

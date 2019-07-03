@@ -1,3 +1,4 @@
+package main;
 
 
 import java.util.ArrayList;
@@ -32,21 +33,23 @@ public class LogUI{
 	 * @param message the message to print
 	 */
 	public static void print(String message) {
-		
-		
-		
 		if(frame == null) {
 			initialize();
 		}
 		if(!frame.isVisible()) {
 			show();
 		}
-		
 		textArea.append(message+"\n");
 		
 		messages.add(message);
 	}
-	
+	public static void print(Exception e) {
+		if(Settings.debugMode) {
+			print(e.getStackTrace().toString());
+		}else {
+			print(e.getMessage());
+		}
+	}
 	
 	private static void show() {
 		if(!initialized) {

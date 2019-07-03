@@ -2,8 +2,11 @@ package game;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 
 import org.json.JSONArray;
+
+import io.javalin.core.util.LogUtil;
 
 public class Board implements Runnable{
 
@@ -21,10 +24,11 @@ public class Board implements Runnable{
 	
 	private boolean won = false;
 	
-	
+	private Lobby lobby;
 	private List<ShapePrefab> nextShapes = new ArrayList<ShapePrefab>();
 	
-	public Board() {
+	public Board(Lobby lobby) {
+		this.lobby = lobby;
 		table = new int[width][height];
 		for(int x=0;x<width;x++) {
 			table[x] = new int[height];
@@ -126,7 +130,7 @@ public class Board implements Runnable{
 				List<Integer> rowsCompleted = checkForRows();
 				if(!rowsCompleted.isEmpty()) {
 					clearRows(rowsCompleted);
-					//TODO add rows add enemys
+					lobby.addRows(rowsCompleted.size(), this);
 				}
 				createNewShape();
 			}
@@ -178,4 +182,25 @@ public class Board implements Runnable{
 		return won;
 	}
 	
+	public void addLowerRow(int amt) {
+		try {
+			int[][] temp = new int[width][height];
+			for(int y=0;y<height;y++) {
+				for(int x=0;x<width;x++) {
+					temp[x][y-amt] = table[x][y];
+				}
+			}
+			for(int y = height-1-amt;y<height;y++) {
+				Random r = new Random();
+				int spaceFree = r.nextInt(width);
+				for(int x=0;x<width;x++) {
+					if(spaceFree == x) continue;
+					temp[x][y] = 1;
+				}
+			}
+			table = temp;
+		}catch(Exception e) {
+			gameOver();
+		}
+	}
 }

@@ -6,6 +6,11 @@ body {
 .container.content{
 	
 }
+playerInLobby{
+	    font-family: Verdana;
+    font-size: 0.9em !important;
+    color: gainsboro;
+}
 canvas { 
    width: 30%;
    height: 85vh;

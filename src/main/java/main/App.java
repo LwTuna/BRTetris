@@ -1,32 +1,26 @@
+package main;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
-
-import org.json.JSONException;
 import org.json.JSONObject;
 
 import PacketProcessors.PacketProcessor;
-import game.Board;
 import game.Lobby;
-import game.ShapePrefab;
 import io.javalin.Javalin;
 
 public class App {
 
 	private static Map<String,PacketProcessor> processors = new HashMap<String,PacketProcessor>();
-	
-	private static final int lobbySize = 1;
-	private static Lobby lobby = new Lobby(lobbySize);
+	private static Lobby lobby;
 	
 	public static void main(String[] args) {
 		Javalin app = Javalin.create()
                 .enableStaticFiles("/public")
                 .start(8080);
 		DatabaseManager.connect("jdbc:sqlite:sql/brtetris.db", "", "");
+		Settings.load();
+		lobby = new Lobby(Settings.lobbySize);
 		app.post("daten", ctx -> {
             ctx.result(processEvent( URLDecoder.decode(ctx.queryString(), StandardCharsets.UTF_8.toString())));
         });
@@ -36,7 +30,7 @@ public class App {
 			try {
 				response.put("succes", lobby.getBoards().get(obj.getInt("id")).move(obj.getString("key")));
 			}catch(Exception e) {
-				LogUI.print(e.getMessage());
+				e.printStackTrace();
 				response.put("succes", false);
 			}
 			return response;
@@ -51,9 +45,11 @@ public class App {
 			container.put("rows", lobby.getBoards().get(obj.getInt("id")).toJSON());
 			container.put("gameOver", lobby.getBoards().get(obj.getInt("id")).isGameOver());
 			container.put("isWon", lobby.getBoards().get(obj.getInt("id")).isWon());
+			container.put("playersAlive", lobby.getPlayersAlive());
 			return container;
 		});
 		processors.put("login", (JSONObject obj) ->{
+			System.out.println(obj.toString());
 			String email = obj.getString("email");
 			String password = obj.getString("password");
 			JSONObject container = new JSONObject();
@@ -63,7 +59,8 @@ public class App {
 				e.printStackTrace();
 				container.put("succes",false);
 			} 
-			container.put("sessionId", Math.random());
+			container.put("sessionId", (int)Math.round(Math.random() * 100000));
+			System.out.println(container.toString());
 			return container;
 		});
 		processors.put("register",(JSONObject obj) ->{

@@ -1,6 +1,6 @@
 const rows = 20,columns=10;
 
-var sessionId = 100000;
+
 
 function getRandomInt(max) {
 	  return Math.floor(Math.random() * Math.floor(max));
@@ -19,9 +19,15 @@ $( document ).ready(function() {
 	imgs[5].src = "res/purpleTile.png";
 	imgs[6].src = "res/redTile.png";
 	imgs[7].src = "res/yellowTile.png";
+	
 });
 
-
+setInterval(() => {
+	var request = {};
+	request.tag = "getCurrentBoard";
+	request.id = sessionId;
+	sendRequest(request, render);
+}, 50);
 
 function render(response){
 	var canvas = document.getElementById('canvas');
@@ -30,15 +36,11 @@ function render(response){
 	var height = canvas.height;
 	var cellHeight = height/rows,cellWidth = width/columns;
 	ctx.clearRect(0,0,width,height);
-	
 	var arr = response.rows;
-	
+	console.log(response.playersAlive);
 	 for ( var x = 0; x < columns; x++ ) {
 	        for ( var y = 0; y < rows; y++ ) {
-	        	if(arr[x][y] !=0){
-	        		ctx.drawImage(imgs[arr[x][y]],x*cellWidth,y*cellHeight,cellWidth,cellHeight);
-	        	}else{
-	        	}
+	        	if(arr[x][y] !=0)	ctx.drawImage(imgs[arr[x][y]],x*cellWidth,y*cellHeight,cellWidth,cellHeight);
 	        }
 	 }
 	 if(response.gameOver){
@@ -52,13 +54,7 @@ function render(response){
 }
 
 document.body.onkeydown = function( e ) {
-    var keys = {
-        37: 'left',	//arrow left
-        39: 'right', //Arrow Right
-        40: 'down',   //Arrow Down
-        38: 'rotate', //Arrow Up
-        32: 'drop'   //Spacebar
-    };
+    var keys = {37: 'left',	    39: 'right', 40: 'down', 38: 'rotate', 32: 'drop'};
     
     if(keys[e.keyCode] != 'undefined' && (e.keyCode == 37 ||e.keyCode == 39 ||e.keyCode == 40 ||e.keyCode == 38 ||e.keyCode == 32)){
     	var obj = {};
@@ -73,9 +69,3 @@ document.body.onkeydown = function( e ) {
     	});
     }
 }
-setInterval(() => {
-	var request = {};
-	request.tag = "getCurrentBoard";
-	request.id = sessionId;
-	sendRequest(request, render);
-}, 50);

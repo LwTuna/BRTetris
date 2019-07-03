@@ -3,6 +3,8 @@ $(function()
         document.getElementById("loginerr").style.display = 'none';
     });
 
+var sessionId;
+
 function login(){
     var usr = document.getElementById("usr").value;
     var pwd = document.getElementById("pwd").value;

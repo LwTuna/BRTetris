@@ -5,6 +5,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import main.Settings;
+
 public class Lobby implements Runnable{
 
 	private final int size;
@@ -22,9 +24,13 @@ public class Lobby implements Runnable{
 	public void join(int sessionId) {
 		if(boards.size()>=size)
 			return;
-		boards.put(sessionId, new Board());
-		if(boards.size() >= size) {
+		boards.put(sessionId, new Board(this));
+		if(Settings.debugMode) {
 			start();
+		}else {
+			if(boards.size() >= size) {
+				start();
+			}
 		}
 	}
 	public void remove(int sessionId) {
@@ -71,10 +77,11 @@ public class Lobby implements Runnable{
 					notGameOver.add(board);
 				}
 			}
-			System.out.println(notGameOver.size());
 			if(notGameOver.size() <=1) {
-				notGameOver.get(0).win();
-				stop();
+				if(!Settings.debugMode) {
+					notGameOver.get(0).win();
+					stop();
+				}
 			}else {
 				try {
 					Thread.sleep(100);
@@ -94,6 +101,24 @@ public class Lobby implements Runnable{
 
 	public Map<Integer, Board> getBoards() {
 		return boards;
+	}
+
+	public int getPlayersAlive() {
+		List<Board> notGameOver = new ArrayList<Board>();
+		for(Board board : boards.values()) {
+			if(!board.isGameOver()) {
+				notGameOver.add(board);
+			}
+		}
+		return notGameOver.size();
+	}
+	
+	public void addRows(int amt,Board board) {
+		for(Board b:boards.values()) {
+			if(!b.isGameOver() && b != board) {
+				b.addLowerRow(amt);
+			}
+		}
 	}
 	
 }
