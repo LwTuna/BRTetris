@@ -1,6 +1,14 @@
 # Battle Royal Tetris
 #### Inhaltverzeichnis
 [Kurzbeschreibung](#Kurzbeschreibung)
+[Screenshot](#Screenshot)
+[Aufbau](#Aufbau)
+[WebApi](#WebApi)
+[Interface](#Interface)
+[Features](#Features)
+[Sonstiges](#Sonstiges)
+[Quellen](#Quellen)
+
 
 #### Kurzbeschreibung
 Für den kleinen Zeitvertreib für Zwischendurch oder doch für die große Herausvorderung für Profis.  
@@ -12,6 +20,14 @@ Man betritt direkt die Lobby und wartet nun das die entsprechende Anzahl an Spie
 
 _Die Anzahl der Spieler lässt sich über die settings.txt in dem "/res" Ordner einstellen. Bei einem Spieler bitte debugmode = true setzen, da ansonsten einzelne Spieler direkt gewonnen hat._  
 
+#### Screenshot
+
+#### Aufbau
+#### WebApi
+#### Interface
+#### Features
+#### Sonstiges
+#### Quellen
 
 
 
