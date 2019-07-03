@@ -1,13 +1,13 @@
 # Battle Royal Tetris
 #### Inhaltverzeichnis
-[Kurzbeschreibung](#Kurzbeschreibung)
-[Screenshot](#Screenshot)
-[Aufbau](#Aufbau)
-[WebApi](#WebApi)
-[Interface](#Interface)
-[Features](#Features)
-[Sonstiges](#Sonstiges)
-[Quellen](#Quellen)
+[Kurzbeschreibung](#Kurzbeschreibung)  
+[Screenshot](#Screenshot)  
+[Aufbau](#Aufbau)  
+[WebApi](#WebApi)  
+[Interface](#Interface)  
+[Features](#Features)  
+[Sonstiges](#Sonstiges)  
+[Quellen](#Quellen)  
 
 
 #### Kurzbeschreibung
