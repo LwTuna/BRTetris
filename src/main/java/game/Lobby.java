@@ -114,6 +114,7 @@ public class Lobby implements Runnable{
 	}
 	
 	public void addRows(int amt,Board board) {
+
 		for(Board b:boards.values()) {
 			if(!b.isGameOver() && b != board) {
 				b.addLowerRow(amt);

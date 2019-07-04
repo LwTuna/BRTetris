@@ -1,6 +1,7 @@
 package game;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
@@ -99,7 +100,6 @@ public class Board implements Runnable{
 		
 	}
 	public synchronized void stop() {
-		System.out.println("stop");
 		if(!running)
 			return;
 		running = false;
@@ -128,9 +128,19 @@ public class Board implements Runnable{
 				table=currentShape.createShapeInBoard(table);
 				
 				List<Integer> rowsCompleted = checkForRows();
+				int rowsToAppear=0;
 				if(!rowsCompleted.isEmpty()) {
 					clearRows(rowsCompleted);
-					lobby.addRows(rowsCompleted.size(), this);
+					outer:for(Integer r :rowsCompleted) {
+						for(int x=0;x<width;x++) {
+							if(table[x][r] == 8) {
+								continue outer;
+							}
+							
+						}
+						rowsToAppear++;
+					}
+					lobby.addRows(rowsToAppear, this);
 				}
 				createNewShape();
 			}
@@ -184,22 +194,26 @@ public class Board implements Runnable{
 	
 	public void addLowerRow(int amt) {
 		try {
+			
 			int[][] temp = new int[width][height];
-			for(int y=0;y<height;y++) {
+			temp = currentShape.removeFromBoard(table);
+			for(int y=0+amt;y<height;y++) {
 				for(int x=0;x<width;x++) {
 					temp[x][y-amt] = table[x][y];
 				}
 			}
+			temp = currentShape.createShapeInBoard(temp);
 			for(int y = height-1-amt;y<height;y++) {
 				Random r = new Random();
 				int spaceFree = r.nextInt(width);
 				for(int x=0;x<width;x++) {
 					if(spaceFree == x) continue;
-					temp[x][y] = 1;
+					temp[x][y] = 8;
 				}
 			}
 			table = temp;
 		}catch(Exception e) {
+			e.printStackTrace();
 			gameOver();
 		}
 	}

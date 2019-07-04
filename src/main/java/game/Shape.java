@@ -20,7 +20,7 @@ public class Shape {
 		case "right" : x++;break;
 		case "down" : y++;break;
 		case "rotate" : rotation = increaseRotation();break;
-		case "drop" : break; //TODO
+		case "drop" : y++;
 		}
 		return createShapeInBoard(board);
 		
@@ -36,7 +36,7 @@ public class Shape {
 		return potRot;
 	}
 	
-	private int[][] removeFromBoard(int[][] board) {
+	public int[][] removeFromBoard(int[][] board) {
 		
 		for(int x=0;x<4;x++) {
 			for(int y=0;y<4;y++) {

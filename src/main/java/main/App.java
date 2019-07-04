@@ -1,4 +1,5 @@
 package main;
+import java.awt.Container;
 import java.net.URLDecoder;
 import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
@@ -27,6 +28,7 @@ public class App {
 		
 		processors.put("input",(JSONObject obj) ->{
 			JSONObject response = new JSONObject();
+			response.put("tag", "input");
 			try {
 				response.put("succes", lobby.getBoards().get(obj.getInt("id")).move(obj.getString("key")));
 			}catch(Exception e) {
@@ -51,7 +53,9 @@ public class App {
 		processors.put("login", (JSONObject obj) ->{
 			String email = obj.getString("email");
 			String password = obj.getString("password");
+			
 			JSONObject container = new JSONObject();
+			container.put("tag", "login");
 			try {
 				container.put("succes", DatabaseManager.login(email, password));
 			} catch (Exception e) {
@@ -66,6 +70,7 @@ public class App {
 			String password = obj.getString("password");
 			String user = obj.getString("user");
 			JSONObject container = new JSONObject();
+			container.put("tag", "register");
 			try {
 				container.put("succes", DatabaseManager.register(email, user, password));
 			} catch (Exception e) {

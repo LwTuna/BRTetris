@@ -3,13 +3,12 @@ body {
 	background-repeat : repeat;
 }
 
-.container.content{
-	
-}
-playerInLobby{
-	    font-family: Verdana;
+
+.playersAlive{
+	font-family: Verdana;
     font-size: 0.9em !important;
-    color: gainsboro;
+    color: white;
+    
 }
 canvas { 
    width: 30%;

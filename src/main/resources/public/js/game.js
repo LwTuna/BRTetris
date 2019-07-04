@@ -9,7 +9,7 @@ function getRandomInt(max) {
 var imgs = [];
 
 $( document ).ready(function() {
-	for(var i = 1;i<=7;i++){
+	for(var i = 1;i<=8;i++){
 		imgs[i] = new Image();
 	}
 	imgs[1].src = "res/blueTile.png";
@@ -19,6 +19,7 @@ $( document ).ready(function() {
 	imgs[5].src = "res/purpleTile.png";
 	imgs[6].src = "res/redTile.png";
 	imgs[7].src = "res/yellowTile.png";
+	imgs[8].src = "res/grayTile.png";
 	
 });
 
@@ -37,7 +38,8 @@ function render(response){
 	var cellHeight = height/rows,cellWidth = width/columns;
 	ctx.clearRect(0,0,width,height);
 	var arr = response.rows;
-	console.log(response.playersAlive);
+	
+	document.getElementById('playersAlive').innerHTML = "Spieler : "+response.playersAlive;
 	 for ( var x = 0; x < columns; x++ ) {
 	        for ( var y = 0; y < rows; y++ ) {
 	        	if(arr[x][y] !=0)	ctx.drawImage(imgs[arr[x][y]],x*cellWidth,y*cellHeight,cellWidth,cellHeight);
