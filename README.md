@@ -22,6 +22,7 @@ _Die Anzahl der Spieler lässt sich über die_ `settings.txt` _in dem "/res" Ord
 
 
 #### Screenshot
+![Screenshot](/screenshot.PNG)
 
 #### Aufbau
 
