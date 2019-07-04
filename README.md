@@ -12,7 +12,7 @@
 
 #### Kurzbeschreibung
 Für den kleinen Zeitvertreib für Zwischendurch oder doch für die große Herausvorderung für Profis.  
-Mein Projekt "Battle Royal Tetris" ist für alle Altersgruppen gedacht. Es verbindet das moderne Battle Royal Genre bei dem mehrer Gegner jder für sich gegeneinander spielen mit dem Klassiker Tetris.
+Mein Projekt "Battle Royal Tetris" ist für alle Altersgruppen gedacht. Es verbindet das moderne Battle Royal Genre bei dem mehrer Gegner jeder für sich gegeneinander spielen mit dem Klassiker Tetris.
 Das Spiel funktioiert genau wie Tetris und mit den Pfeiltasten lassen sich die Steine bewegen und auch drehen. Sobald ein Spieler eine Reihe vervollständigt erscheinen volle Reihen bei den anderen Spielern.  
 Wer als letzes noch im Spiel ist gewinnt!  
 Um Spielen zu können muss zunächst über das Registrierungsformular ein Benutzer erstellt werden, welcher sich dann mit den entsprechend richtigen Daten im Login Menu anmelden kann.  
@@ -33,20 +33,20 @@ Das zweite ist eine Callback funktion, welche mit der Antwort vom Server als Par
 Sowohl die Serverseitigen als auch die Clientseitigen Pakete sind alle Strings im JSON Format und beinhalten alle ein `tag:String` Attribut, welches für die Indentifikation des 
 Paketes zuständig ist.
 Der Server ruft mit dem Objekt die `processEvent()` Methode auf welche eine Instanz eines Funktionalen Interfaces in der Map `Map<String,PacketProcessor> processors` mithilfe des Tag attributs sucht,
-und die Methode `JSONObject process(JSONObject obj)` des PacketProcessors mit der Request aufruft und die ensprechende Response and den Client zurückgibt.  
+und die Methode `JSONObject process(JSONObject obj)` des PacketProcessors mit der Request aufruft und die ensprechende Response and den Client zurä¼ckgibt.  
 
 Die Clientseitigen Packete sind : 
 
 `{tag:'input',key:String}` wobei key rotate,down,left,right oder drop sein kann. Es wird bei jedem keyPressEvent gesendet, wenn die ensprechende Taste eine Funktion hat.  
-`{tag:'getCurrentBoard',id:int}` wobei der Integer die SessionId des users ist und so das dazugeh�rige Spielbrett abfragt. Dies wird in der `game.js` in der `setInterval` Funktion abgefragt.  
-`{tag:'login',email:String,password:String}` wobei die Email und das Passwort schl�ssel f�r den Benutzer sind, welche in der Datenbank abgefragt werden. Dies wird mit dem Login Button aufgerufen.  
-`{tag:'register',email:String,password:String,username:String}` wobei die Email und das Passwort Schl�ssel f�r den Benutzer sind und der username der Anzeigename. Dies wird mit dem Registrieungs Button aufgerufen.  
+`{tag:'getCurrentBoard',id:int}` wobei der Integer die SessionId des users ist und so das dazugehörige Spielbrett abfragt. Dies wird in der `game.js` in der `setInterval` Funktion abgefragt.  
+`{tag:'login',email:String,password:String}` wobei die Email und das Passwort schlüssel für den Benutzer sind, welche in der Datenbank abgefragt werden. Dies wird mit dem Login Button aufgerufen.  
+`{tag:'register',email:String,password:String,username:String}` wobei die Email und das Passwort Schlüssel für den Benutzer sind und der username der Anzeigename. Dies wird mit dem Registrieungs Button aufgerufen.  
 
 
-Die Antworten vom Server sehen �hnlich aus:  
+Die Antworten vom Server sehen ähnlich aus:  
 
-Antwort auf `input` : `{tag:'input',success:boolean}` wobei der success Wert angibt ob der ausgef�hrte Zug erlaubt war oder nicht.  
-Antwort auf `getCurrentBoard` : `{tag:'board',started:boolean,rows:[][],gameOver:boolean,isWon:boolean,playersAlive:int}` wobei started angibt ob das Spiel gestartet ist,rows ist ein multidimensionales array welches die Steine des Feldes enh�lt, gameover gibt an, ob der spieler verloren hat,  
+Antwort auf `input` : `{tag:'input',success:boolean}` wobei der success Wert angibt ob der ausgeführte Zug erlaubt war oder nicht.  
+Antwort auf `getCurrentBoard` : `{tag:'board',started:boolean,rows:[][],gameOver:boolean,isWon:boolean,playersAlive:int}` wobei started angibt ob das Spiel gestartet ist,rows ist ein multidimensionales array welches die Steine des Feldes enhält, gameover gibt an, ob der spieler verloren hat,  
 isWon ob der Spieler gewonnen hat und playersAlive wie viele Spieler noch im Spiel sind.  
 Antwort auf `login` : `{tag:'login',success:boolean}` wobei der success Wert angibt ob die Anmeldung erfolgreich war oder nicht.  
 Antwort auf `register` : `{tag:'register',success:boolean}` wobei der success Wert angibt ob die Regestrierung erfolgreich war oder nicht.  
@@ -55,10 +55,10 @@ Antwort auf `register` : `{tag:'register',success:boolean}` wobei der success We
 
 #### Features
 Die TAN Features die ich in diesem Projekt genutzt habe sind:
--Das Speichern und Laden von Daten aus mehreren Textdateien f�r die Einstellung des Spiels und das Laden der verschiedenen Spielsteine.
--Das Nutzen von Bootstrap f�r die grundlegende Erstellung des CSS Codes f�r die Website.
+-Das Speichern und Laden von Daten aus mehreren Textdateien für die Einstellung des Spiels und das Laden der verschiedenen Spielsteine.
+-Das Nutzen von Bootstrap für die grundlegende Erstellung des CSS Codes für die Website.
 -Asynchrone Requests als generelle Abfrageform an den Server
--Das JSON Datenformat f�r die �bertragung der Daten zwischen Client und Server. Daf�r habe ich au�ederdem die Bibliothek org.json f�r Java genutzt.
+-Das JSON Datenformat für die Übertragung der Daten zwischen Client und Server. Dafür habe ich außederdem die Bibliothek org.json für Java genutzt.
 
 #### Sonstiges
 Für die LOC Zählung bitte nur den src Ordner zählen lassen und die Libraries in srx/main/rescources/public/js/lib weglassen.  
@@ -72,9 +72,9 @@ und auch Spieler mit mehr Siegen gegeneinander spielen und so ein gewisses Ratin
 Außerdem sollten die Benutzernamen und der momentane Feld der gegnerischen Spieler auch angezeigt werden.  
 Ich hätte zusätlich noch gerne Animationen und Sounds auf der Website eingebunden, jedoch war durfte der Javascript anteil ja nur bei <10% liegen.  
 Es hätte außerdem auch verschiedene Schwierigkeitstufen an Bots gegeben, die die Lobbys nach eine bestimmten Zeit aufgefüllt hätten, wenn diese nich voll gewesen wäre.
-Au�erdem h�tte ich gerne den Cookie Store genutz, damit die Spieler auch nach dem Schli�en der Website eingeloggt blieben.  
+Außerdem hätte ich gerne den Cookie Store genutz, damit die Spieler auch nach dem Schlißen der Website eingeloggt blieben.  
 
-Das Spiel funktioniert super in mehreren Tabs, so das man für Testzwecke sich einfach mehrmals anmelden kann und eine Lobby füllt.  
+Das Spiel funktioniert super in mehreren Tabs, so das man für Testzwecke sich einfach mehrmals anmelden kann und eine Lobby fällt.  
 Getestete Browser sind Chrome und Firefox, wobei andere Browser eigentlich kein Problem sein dürften da keine all zu Speziellen Features eines Browsers genutzt wurden.  
 
 #### Quellen
