@@ -46,7 +46,6 @@ public class DatabaseManager {
 	 * @return the result set from the database
 	 */
 	public static ResultSet executeStatement(String command) {
-		LogUI.print(command);
 		if(connection == null) {
 			throw new DatabaseException("No Connection to Database!");
 		}

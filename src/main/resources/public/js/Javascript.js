@@ -1,7 +1,4 @@
 
-
-
-
 //Server
 
 function sendRequest(request,callback){
@@ -25,9 +22,6 @@ function sendRequest(request,callback){
 function printAnsw(msg){
 	console.log(msg);
 }
-
-
-
 $( document ).ready(function() {
 	$(".container.content").load("login.html");	
 });

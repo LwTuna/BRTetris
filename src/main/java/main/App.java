@@ -49,7 +49,6 @@ public class App {
 			return container;
 		});
 		processors.put("login", (JSONObject obj) ->{
-			System.out.println(obj.toString());
 			String email = obj.getString("email");
 			String password = obj.getString("password");
 			JSONObject container = new JSONObject();
@@ -60,7 +59,6 @@ public class App {
 				container.put("succes",false);
 			} 
 			container.put("sessionId", (int)Math.round(Math.random() * 100000));
-			System.out.println(container.toString());
 			return container;
 		});
 		processors.put("register",(JSONObject obj) ->{
