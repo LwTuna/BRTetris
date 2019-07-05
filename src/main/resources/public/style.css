@@ -4,11 +4,11 @@ body {
 }
 
 
-.playersAlive{
+#playersAlive{
 	font-family: Verdana;
-    font-size: 0.9em !important;
-    color: white;
-    
+    font-size: 1.9em !important;
+    color: white !important;
+    padding-left: 80%;
 }
 canvas { 
    width: 30%;
