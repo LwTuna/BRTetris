@@ -62,8 +62,7 @@ Die TAN Features die ich in diesem Projekt genutzt habe sind:
 -Das JSON Datenformat für die Übertragung der Daten zwischen Client und Server. Dafür habe ich außederdem die Bibliothek org.json für Java genutzt.
 
 #### Sonstiges
-Für die LOC Zählung bitte nur den src Ordner zählen lassen und die Libraries in srx/main/rescources/public/js/lib weglassen.  
-Außerdem die Tester.java Datei dafür ignorieren. Sie ist ein alleinstehendes Programm welches automatische eine neue Instanz des Servers anlegt und testet.
+Für die LOC Zählung bitte nur den src Ordner zählen lassen und die Libraries in srx/main/rescources/public/js/lib weglassen. 
 Für Testzwecke lässt sich außerdem die settings.txt in dem Res Ordner bearbeiten und so die Spieleranzahl in einer Lobby verändern. Falls nur ein Spieler
 spielen soll bitte auch den DebugMode auf true ändern da ansonsten das Spiel direkt vorbei ist.  
 
