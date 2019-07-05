@@ -60,6 +60,7 @@ Die TAN Features die ich in diesem Projekt genutzt habe sind:
 -Das Nutzen von Bootstrap für die grundlegende Erstellung des CSS Codes für die Website.
 -Asynchrone Requests als generelle Abfrageform an den Server
 -Das JSON Datenformat für die Übertragung der Daten zwischen Client und Server. Dafür habe ich außederdem die Bibliothek org.json für Java genutzt.
+-Das Nutzen einer Datenbank für ein geeignetes Login/Registrieungssystem im Backend
 
 #### Sonstiges
 Für die LOC Zählung bitte nur den src Ordner zählen lassen und die Libraries in srx/main/rescources/public/js/lib weglassen. 
