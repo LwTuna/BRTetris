@@ -6,9 +6,6 @@ import java.io.FileReader;
 import java.util.Arrays;
 import java.util.List;
 
-import org.json.JSONArray;
-import org.json.JSONObject;
-
 public class ShapePrefab {
 
 	public static List<ShapePrefab> shapes = Arrays.asList(new ShapePrefab[] {new ShapePrefab("res/IShape.txt","I",5,0,1,0),

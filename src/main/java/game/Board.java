@@ -1,13 +1,10 @@
 package game;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Random;
 
 import org.json.JSONArray;
-
-import io.javalin.core.util.LogUtil;
 
 public class Board implements Runnable{
 
@@ -130,16 +127,19 @@ public class Board implements Runnable{
 				List<Integer> rowsCompleted = checkForRows();
 				int rowsToAppear=0;
 				if(!rowsCompleted.isEmpty()) {
-					clearRows(rowsCompleted);
-					outer:for(Integer r :rowsCompleted) {
+					
+					outer:for(Integer y :rowsCompleted) {
 						for(int x=0;x<width;x++) {
-							if(table[x][r] == 8) {
+							System.out.println(x+" "+y+" "+table[x][y]);
+							if(table[x][y] == 8) {
 								continue outer;
 							}
 							
 						}
 						rowsToAppear++;
 					}
+
+				clearRows(rowsCompleted);
 					lobby.addRows(rowsToAppear, this);
 				}
 				createNewShape();
@@ -203,7 +203,7 @@ public class Board implements Runnable{
 				}
 			}
 			temp = currentShape.createShapeInBoard(temp);
-			for(int y = height-1-amt;y<height;y++) {
+			for(int y = height-amt;y<height;y++) {
 				Random r = new Random();
 				int spaceFree = r.nextInt(width);
 				for(int x=0;x<width;x++) {

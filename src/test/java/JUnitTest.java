@@ -9,4 +9,8 @@ class JUnitTest {
 		assertTrue(true);
 	}
 
+	@Test
+	void penis() {
+		assertTrue(true);
+	}
 }

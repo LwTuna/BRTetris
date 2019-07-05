@@ -38,7 +38,6 @@ function render(response){
 	var cellHeight = height/rows,cellWidth = width/columns;
 	ctx.clearRect(0,0,width,height);
 	var arr = response.rows;
-	
 	document.getElementById('playersAlive').innerHTML = "Spieler : "+response.playersAlive;
 	 for ( var x = 0; x < columns; x++ ) {
 	        for ( var y = 0; y < rows; y++ ) {

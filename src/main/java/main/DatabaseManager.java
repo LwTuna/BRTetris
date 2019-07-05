@@ -6,8 +6,6 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 /**
  * The Database API to select,insert,delete etc from database
  * connect() should be always called first to initiliZe the database connection
