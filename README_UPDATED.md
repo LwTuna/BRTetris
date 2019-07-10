@@ -35,41 +35,41 @@ Weitere Hinweise bei [Sonstiges](#Sonstiges)
 
 Verlinkter Dateiname | Dateiart | LOC
 ---------------------|----------|-----
-BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\css\bootstrap.css                          |CSS|8832
-BRTetris\src\main\resources\public\js\lib\jquery-3.4.1.js                                                 |Javascript|6801
-BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\js\bootstrap.bundle.js                     |Javascript|4493
-BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\css\bootstrap-grid.css                     |CSS|3511
-BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\js\bootstrap.js                            |Javascript|3262
-BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\css\bootstrap-reboot.css                   |CSS|267
-BRTetris\src\main\java\game\Board.java                                                                    |Java|181
-BRTetris\src\main\java\game\Lobby.java                                                                    |Java|112
-BRTetris\src\main\java\main\App.java                                                                      |Java| 97
-BRTetris\src\main\java\game\Shape.java                                                                    |Java| 95
-BRTetris\src\main\java\DatabaseManager.java                                                               |Java|82
-BRTetris\src\main\java\App.java                                                                           |Java|76
-BRTetris\src\main\java\main\DatabaseManager.java                                                          |Java|68
-BRTetris\src\main\java\main\LogUI.java                                                                    |Java| 65
-BRTetris\src\main\java\game\ShapePrefab.java                                                              |Java|58
-BRTetris\src\main\resources\public\js\game.js                                                             |Javascript|55
-BRTetris\src\main\java\LogUI.java                                                                         |Java|51
-BRTetris\src\main\resources\public\style.css                                                              |CSS|46
-BRTetris\src\main\java\main\Settings.java                                                                 |Java|26
-BRTetris\src\main\resources\public\index.html                                                             |HTML|25
-BRTetris\src\main\resources\public\register.html                                                          |HTML|21
-BRTetris\src\main\resources\public\js\Javascript.js                                                       |Javascript|21
-BRTetris\src\main\resources\public\js\login.js                                                            |Javascript|19
-BRTetris\src\main\resources\public\login.html                                                             |HTML|17
-BRTetris\src\main\resources\public\js\register.js                                                         |Javascript|15
-BRTetris\src\main\java\main\DatabaseException.java                                                        |Java|12
-BRTetris\src\main\java\DatabaseException.java                                                             |Java| 6
-BRTetris\src\main\java\PacketProcessors\PacketProcessor.java                                              |Java|5
-BRTetris\src\main\resources\public\game.html                                                              |HTML| 5
-BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\css\bootstrap.min.css                      |CSS|1
-BRTetris\src\main\resources\public\js\lib\jquery-3.4.1.min.js                                             |Javascript|1
-BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\js\bootstrap.bundle.min.js                 |Javascript|1
-BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\css\bootstrap-grid.min.css                 |CSS|1
-BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\js\bootstrap.min.js                        |Javascript| 1
-BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\css\bootstrap-reboot.min.css               |CSS|1
+[bootstrap.css](src/main/resources/public/js/lib/bootstrap-4.3.1-dist/css/bootstrap.css)                       |CSS|8832
+src/main/resources/public/js/lib/jquery-3.4.1.js                                                 |Javascript|6801
+src/main/resources/public/js/lib/bootstrap-4.3.1-dist/js/bootstrap.bundle.js                     |Javascript|4493
+src/main/resources/public/js/lib/bootstrap-4.3.1-dist/css/bootstrap-grid.css                     |CSS|3511
+src/main/resources/public/js/lib/bootstrap-4.3.1-dist/js/bootstrap.js                            |Javascript|3262
+src/main/resources/public/js/lib/bootstrap-4.3.1-dist/css/bootstrap-reboot.css                   |CSS|267
+src/main/java/game/Board.java                                                                    |Java|181
+src/main/java/game/Lobby.java                                                                    |Java|112
+src/main/java/main/App.java                                                                      |Java| 97
+src/main/java/game/Shape.java                                                                    |Java| 95
+src/main/java/DatabaseManager.java                                                               |Java|82
+src/main/java/App.java                                                                           |Java|76
+src/main/java/main/DatabaseManager.java                                                          |Java|68
+src/main/java/main/LogUI.java                                                                    |Java| 65
+src/main/java/game/ShapePrefab.java                                                              |Java|58
+src/main/resources/public/js/game.js                                                             |Javascript|55
+src/main/java/LogUI.java                                                                         |Java|51
+src/main/resources/public/style.css                                                              |CSS|46
+src/main/java/main/Settings.java                                                                 |Java|26
+src/main/resources/public/index.html                                                             |HTML|25
+src/main/resources/public/register.html                                                          |HTML|21
+src/main/resources/public/js/Javascript.js                                                       |Javascript|21
+src/main/resources/public/js/login.js                                                            |Javascript|19
+src/main/resources/public/login.html                                                             |HTML|17
+src/main/resources/public/js/register.js                                                         |Javascript|15
+src/main/java/main/DatabaseException.java                                                        |Java|12
+src/main/java/DatabaseException.java                                                             |Java| 6
+src/main/java/PacketProcessors/PacketProcessor.java                                              |Java|5
+src/main/resources/public/game.html                                                              |HTML| 5
+src/main/resources/public/js/lib/bootstrap-4.3.1-dist/css/bootstrap.min.css                      |CSS|1
+src/main/resources/public/js/lib/jquery-3.4.1.min.js                                             |Javascript|1
+src/main/resources/public/js/lib/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js                 |Javascript|1
+src/main/resources/public/js/lib/bootstrap-4.3.1-dist/css/bootstrap-grid.min.css                 |CSS|1
+src/main/resources/public/js/lib/bootstrap-4.3.1-dist/js/bootstrap.min.js                        |Javascript| 1
+src/main/resources/public/js/lib/bootstrap-4.3.1-dist/css/bootstrap-reboot.min.css               |CSS|1
 
 
 ### Testdateien (TST)
