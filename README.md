@@ -97,11 +97,22 @@ Zum Beispiel wird die Login Request  `{"tag:":"login"}` beinhalten, sodass der S
  
  Diese Snippet zeigt, wie dem Javalin Objekt ein neuer PostEventHandler hinzugefügt wird, welcher das JSON Objekt decoded und damit die `String processEvent(String decode)` Methode aufruft und den String im JSON Format als result setzt.  
  
+ Zu Beginn werden außerdem auch die [Spielsteine](src/main/java/game/ShapePrefab.java) aus Textdateien im [res](res) Ordner geladen. Diese textdateinen beinhalten die mögliche Drehungen der Spielsteine in einem 4x4 Raster, wobei der Stein als 1 und Luft als 0 dargestellt wird.
+ 
  Loggt sich ein neuer Spieler ein, so wird er automatisch der [Lobby](src/main/java/game/Lobby.java) zugewiesen und es wird ein [Board](src/main/java/game/Board.java) für ihn erstellt. Außerdem erhält er eine SessionId die lokal auf dem Client zwischengespeichert wird.   Sobald die Anzahl der benötigten Spieler erreicht ist, startet das Spiel(Lobby) und es starten auch die einzelnen Boards. Sowohl die Lobby implementieren das Runnable interface, und eine Start und Stop Methode. Die Start Methode erstellt zudem einen neuen Thread und startet Diesen.
  
  Der Spieler fragt in einem Interval in der [game.js](src/main/resources/public/js/game.js) sein momentanes Spielbrett von dem Server ab. Die `sendRequest(request,callback)` funktion wird in dem Fall mit `{"tag" : "getCurrentBoard","id":sessionId}` aufgerufen und der `render` funktion als Callback. Die `render` Funktion zeichnet nun das momentane Spielfeld auf dem [game.html](src/main/resources/public/game.html) canvas.
  Sollte der Spieler nun eine Taste drücken [game.js 54-61](src/main/resources/public/js/game.js), wird eine Request an den Server gestellt und Dieser prüft nun in der [canMove](src/main/java/game/Shape.java)(16-28) Methode, ob Diese Bewegung des [Spielsteins](src/main/java/game/Shape.java) möglich war.
 Sollte ein Spieler nun eine Reihe vervollstädigen (siehe [Board.java](src/main/java/game/Board.java)(171-180)), so wird eine neue Reihe bei den anderen Spielern erstellt.
+Das Spiel endet, sobald alle bis auf einen Spieler game over [Lobby.java](src/main/java/game/Lobby.java)(80-84) sind.
+
+Die Website hingegen ist mit Bootstrap und JQuery aufgebaut. So wird alles mit JQuerys `$().load();` Methode in den `container.content`
+der [index.html](src/main/resources/public/index.html) nachgeladen.
+
+Die Login/Registrierungsvorgänge finden über eine SQLite Datenbank statt, welche in das Projekt mit eingebunden ist und die daten in der [brtetris.db](sql/brtetris.db) speichert.
+Die Zugriffe auf die Datenbank erfolgen alle in der [Databasemanager.java](src/main/java/main/DatabaseManager.java) Datei. Zunächt muss jedoch eine Verbindung aufegbaut werden, welches in der App main Methode geschieht.
+
+Es gibt außerdem ein Logfile Fenster, welches Errors und Datenbank anfragen ausgibt. Man kann es problemlos schließen und es öffnet sich wieder, sobald ein neuer Eintrag im Fenster entsteht.
 
 ## Dokumentation des implementierten WebAPIs
 
@@ -131,7 +142,10 @@ Antwort auf `login` : `{tag:'login',success:boolean}` wobei der success Wert ang
 Antwort auf `register` : `{tag:'register',success:boolean}` wobei der success Wert angibt ob die Regestrierung erfolgreich war oder nicht
   
 ## Dokumentation des Interfaces
-TODO
+
+Die Dokuementation des Interfaces ist in der ausführlichen [Aufbau der Anwendung](#Aufbau-der-Anwendung)  mit beinhaltet, da Diese bereits den Aufbau und Ablauf des Projektes mit beinhaltet. 
+Zum Aufbau der Schnittstelle wird ausßerdem auch in dem [Aufbau der Anwendung](#Aufbau-der-Anwendung) und natürlich in der [ Dokumentation des implementierten WebAPIs](#Dokumentation-des-implementierten-WebAPIs) hingewiesen.
+
 ## Technischer Anspruch (TA) und Umsetzung der Features
 
 Ich habe folgende Features verwendet. Die verlinkte Datei zeigt beispielhaft den Einsatz dieses Features in den angegebenen Zeilen im Quellcode.
@@ -141,7 +155,8 @@ Ich habe folgende Features verwendet. Die verlinkte Datei zeigt beispielhaft den
 3. Das JSON Datenformat für die Übertragung der Daten zwischen Client und Server. Dafür habe ich außederdem die Bibliothek org.json für Java genutzt, [Javascript.js](src/main/resources/public/js/Javascript.js) (1-10) [App.java](src/main/java/main/App.java) (32-84)  
 4. Das Nutzen einer Datenbank für ein geeignetes Login/Registrieungssystem im Backend, [App.java](src/main/java/main/DatabaseManager.java) (19-103)  
 
-TODO <Ihre Dokumentation zu den Features>
+Die Features werden bereits in [Beschreibung des Projektaufbaus](#Beschreibung-des-Projektaufbaus)() und in [WebApi](#Dokumentation-des-implementierten-WebAPIs)(Verwendung von JSON) erläutert.
+
 ## Quellennachweis
 
 Als Quellen hab ich hauptsächlich das Gruppenprojekt genutzt und mir den von mir geschriebenen Datenbank Code kopiert und an das Projekt angepasst habe.
