@@ -3,13 +3,13 @@
 Name & Praktikumstermin: Jonas Reitz, 5240409 (Fr/1, Kr)
 
 ## Inhaltsverzeichnis
-[Kurzbeschreibung inkl Screenshot](#Kurzbeschreibung-inkl-Screenshot)
-[Beschreibung des Projektaufbaus](#Beschreibung-des-Projektaufbaus)
-[WebApi](#Dokumentation-des-implementierten-WebAPIs)
-[Interface](#Dokumentation-des-interfaces)
-[Technischer Anspruch und Features](#Technischer-Anspruch-(TA)-und-Umsetzung-der-Features)
-[Quellen](#Quellennachweis)
-[Sonstiges](#Sonstiges)
+[Kurzbeschreibung inkl Screenshot](#Kurzbeschreibung-inkl-Screenshot)  
+[Beschreibung des Projektaufbaus](#Beschreibung-des-Projektaufbaus)  
+[WebApi](#Dokumentation-des-implementierten-WebAPIs)  
+[Interface](#Dokumentation-des-interfaces)  
+[Technischer Anspruch und Features](#Technischer-Anspruch-(TA)-und-Umsetzung-der-Features)  
+[Quellen](#Quellennachweis)  
+[Sonstiges](#Sonstiges)  
 
 ## Kurzbeschreibung inkl Screenshot
 
@@ -23,7 +23,7 @@ Man betritt direkt die Lobby und wartet nun das die entsprechende Anzahl an Spie
 
 ![Screenshot](screenshot.PNG)
 
-**Hinweise**: _Die Anzahl der Spieler lässt sich über die_ 'settings.txt' _in dem "/res" Ordner einstellen. Bei einem Spieler bitte_ 'debugmode = true' _setzen, da ansonsten einzelne Spieler direkt gewonnen hat._
+**Hinweise**: _Die Anzahl der Spieler lässt sich über die_ `settings.txt` _in dem "/res" Ordner einstellen. Bei einem Spieler bitte_ `debugmode = true` _setzen, da ansonsten einzelne Spieler direkt gewonnen hat._
 Weitere Hinweise bei [Sonstiges](#Sonstiges)
 
 ## Beschreibung des Projektaufbaus
@@ -69,7 +69,7 @@ Außerdem hier noch die Screenshots meiner LOC Zählung erstmal mit den Librarie
 und hier ohne :
 ![Screenshot](withoutLib.PNG)
 
-Fall Sie diese Zählung wiederholen wollen entfernen Sie bitte den 'src/resources/public/js/lib' Ordner, da er die Dateien von Bootstrap und JQuery enthält und zum offline arbeiten notwendig waren.
+Fall Sie diese Zählung wiederholen wollen entfernen Sie bitte den `src/resources/public/js/lib` Ordner, da er die Dateien von Bootstrap und JQuery enthält und zum offline arbeiten notwendig waren.
 
 ### Testdateien (TST)
 Verlinkter Dateiname | Testart | Anzahl der Tests
@@ -77,32 +77,32 @@ Verlinkter Dateiname | Testart | Anzahl der Tests
 [JUnitTest.java](src/test/java/JUnitTest.java ) | JUnit5 | 21
 
 Die Tests werden wie folgt ausgeführt:
-Mit 'Gradle test' in dem Hauptverzeichnis lassen sich alles Tests automatisch ausführen.
+Mit `Gradle test` in dem Hauptverzeichnis lassen sich alles Tests automatisch ausführen.
 
 ### Aufbau der Anwendung
 
 Zu Beginn werden [PacketProcessors](src/main/java/PacketProcessors/PacketProcessor.java), nach der Initialisierung der Javalin Objektes in der [App.java](src/main/java/main/App.java) Datei erstellt.
-Diese werden zusammen mit einem Schlüssel String in eine 'Map<String,PacketProcessor&gt;' hinzugefügt. Dieser Schlüssel ist ein Tag Attribut eines JSON Objektes, welches in jeder Request des Clients enthalten ist.
-Zum Beispiel wird die Login Request '{"tag:":"login"}' beinhalten, sodass der Server mit diesem Tag den dazugehörigen [PacketProcessors](src/main/java/PacketProcessors/PacketProcessor.java) in der Map finden kann und die dazugehörige Methode 'JSONObject process(JSONObject obj)' aufrufen kann. Diese benötigt das Request JSON Objekt und liefert das result Objekt zurück.
-'app.post("daten", ctx -&gt; {
+Diese werden zusammen mit einem Schlüssel String in eine `Map<String,PacketProcessor&gt;` hinzugefügt. Dieser Schlüssel ist ein Tag Attribut eines JSON Objektes, welches in jeder Request des Clients enthalten ist.
+Zum Beispiel wird die Login Request `{"tag:":"login"}` beinhalten, sodass der Server mit diesem Tag den dazugehörigen [PacketProcessors](src/main/java/PacketProcessors/PacketProcessor.java) in der Map finden kann und die dazugehörige Methode `JSONObject process(JSONObject obj)` aufrufen kann. Diese benötigt das Request JSON Objekt und liefert das result Objekt zurück.
+`app.post("daten", ctx -&gt; {
 try {
 ctx.result(processEvent( URLDecoder.decode(ctx.queryString(), StandardCharsets.UTF_8.toString())));
 }catch(Exception e) {
 LogUI.print(e);
-}'
+}`
 
-Diese Snippet zeigt, wie dem Javalin Objekt ein neuer PostEventHandler hinzugefügt wird, welcher das JSON Objekt decoded und damit die 'String processEvent(String decode)' Methode aufruft und den String im JSON Format als result setzt.
+Diese Snippet zeigt, wie dem Javalin Objekt ein neuer PostEventHandler hinzugefügt wird, welcher das JSON Objekt decoded und damit die `String processEvent(String decode)` Methode aufruft und den String im JSON Format als result setzt.
 
 Zu Beginn werden außerdem auch die [Spielsteine](src/main/java/game/ShapePrefab.java) aus Textdateien im [res](res) Ordner geladen. Diese Textdateien beinhalten die mögliche Drehungen der Spielsteine in einem 4x4 Raster, wobei der Stein als 1 und Luft als 0 dargestellt wird.
 
 Loggt sich ein neuer Spieler ein, so wird er automatisch der [Lobby](src/main/java/game/Lobby.java) zugewiesen und es wird ein [Board](src/main/java/game/Board.java) für ihn erstellt. Außerdem erhält er eine SessionId die lokal auf dem Client zwischengespeichert wird. Sobald die Anzahl der benötigten Spieler erreicht ist, startet das Spiel(Lobby) und es starten auch die einzelnen Boards. Sowohl die Lobby implementieren das Runnable interface, und eine Start und Stop Methode. Die Start Methode erstellt zudem einen neuen Thread und startet diesen.
 
-Der Spieler fragt in einem Intervall in der [game.js](src/main/resources/public/js/game.js) sein momentanes Spielbrett von dem Server ab. Die 'sendRequest(request,callback)' funktion wird in dem Fall mit '{"tag" : "getCurrentBoard","id":sessionId}' aufgerufen und der 'render' funktion als Callback. Die 'render' Funktion zeichnet nun das momentane Spielfeld auf dem [game.html](src/main/resources/public/game.html) canvas.
+Der Spieler fragt in einem Intervall in der [game.js](src/main/resources/public/js/game.js) sein momentanes Spielbrett von dem Server ab. Die `sendRequest(request,callback)` funktion wird in dem Fall mit `{"tag" : "getCurrentBoard","id":sessionId}` aufgerufen und der `render` funktion als Callback. Die `render` Funktion zeichnet nun das momentane Spielfeld auf dem [game.html](src/main/resources/public/game.html) canvas.
 Sollte der Spieler nun eine Taste drücken [game.js 54-61](src/main/resources/public/js/game.js), wird eine Request an den Server gestellt und Dieser prüft nun in der [canMove](src/main/java/game/Shape.java)(16-28) Methode, ob diese Bewegung des [Spielsteins](src/main/java/game/Shape.java) möglich war.
 Sollte ein Spieler nun eine Reihe vervollständigen (siehe [Board.java](src/main/java/game/Board.java)(171-180)), so wird eine neue Reihe bei den anderen Spielern erstellt.
 Das Spiel endet, sobald alle bis auf einen Spieler game over [Lobby.java](src/main/java/game/Lobby.java)(80-84) sind.
 
-Die Website hingegen ist mit Bootstrap und JQuery aufgebaut. So wird alles mit JQuerys '$().load();' Methode in den 'container.content'
+Die Website hingegen ist mit Bootstrap und JQuery aufgebaut. So wird alles mit JQuerys `$().load();` Methode in den `container.content`
 der [index.html](src/main/resources/public/index.html) nachgeladen.
 
 Die Login/Registrierungsvorgänge finden über eine SQLite Datenbank statt, welche in das Projekt mit eingebunden ist und die Daten in der [brtetris.db](sql/brtetris.db) speichert.
@@ -112,29 +112,29 @@ Es gibt außerdem ein Logfile Fenster, welches Errors und Datenbank anfragen aus
 
 ## Dokumentation des implementierten WebAPIs
 
-Zum Senden von Paketen der Website wird nur eine Funktion genutzt, welche sich in der Datei 'Javascript.js' befindet und welche in der 'index.html' geladen wird.
-Die funktion 'sendRequest()' nutzt zwei Parameter. Der Erste ist das JSON-Objekt welches zum Server gesendet werden soll. 
+Zum Senden von Paketen der Website wird nur eine Funktion genutzt, welche sich in der Datei `Javascript.js` befindet und welche in der `index.html` geladen wird.
+Die funktion `sendRequest()` nutzt zwei Parameter. Der Erste ist das JSON-Objekt welches zum Server gesendet werden soll. 
 Das zweite ist eine Callback funktion, welche mit der Antwort vom Server als Parameter aufgerufen wird.
 
-Sowohl die Serverseitigen als auch die Clientseitigen Pakete sind alle Strings im JSON Format und beinhalten alle ein 'tag:String' Attribut, welches für die Identifikation des
+Sowohl die Serverseitigen als auch die Clientseitigen Pakete sind alle Strings im JSON Format und beinhalten alle ein `tag:String` Attribut, welches für die Identifikation des
 Paketes zuständig ist.
-Der Server ruft mit dem Objekt die 'processEvent()' Methode auf welche eine Instanz eines Funktionalen Interfaces in der Map 'Map<String,PacketProcessor&gt; processors' mithilfe des Tag attributs sucht,
-und die Methode 'JSONObject process(JSONObject obj)' des PacketProcessors mit der Request aufruft und die ensprechende Response and den Client zurückgibt.
+Der Server ruft mit dem Objekt die `processEvent()` Methode auf welche eine Instanz eines Funktionalen Interfaces in der Map `Map<String,PacketProcessor&gt; processors` mithilfe des Tag attributs sucht,
+und die Methode `JSONObject process(JSONObject obj)` des PacketProcessors mit der Request aufruft und die ensprechende Response and den Client zurückgibt.
 
 Die Clientseitigen Pakete sind :
 
-'{tag:'input',key:String}' wobei key rotate,down,left,right oder drop sein kann. Es wird bei jedem keyPressEvent gesendet, wenn die ensprechende Taste eine Funktion hat.
-'{tag:'getCurrentBoard',id:int}' wobei der Integer die SessionId des users ist und so das dazugehörige Spielbrett abfragt. Dies wird in der 'game.js' in der 'setInterval' Funktion abgefragt.
-'{tag:'login',email:String,password:String}' wobei die Email und das Passwort schlüssel für den Benutzer sind, welche in der Datenbank abgefragt werden. Dies wird mit dem Login Button aufgerufen.
-'{tag:'register',email:String,password:String,username:String}' wobei die Email und das Passwort Schlüssel für den Benutzer sind und der username der Anzeigename. Dies wird mit dem Registrieungs Button aufgerufen.
+`{tag:`input`,key:String}` wobei key rotate,down,left,right oder drop sein kann. Es wird bei jedem keyPressEvent gesendet, wenn die ensprechende Taste eine Funktion hat.
+`{tag:`getCurrentBoard`,id:int}` wobei der Integer die SessionId des users ist und so das dazugehörige Spielbrett abfragt. Dies wird in der `game.js` in der `setInterval` Funktion abgefragt.
+`{tag:`login`,email:String,password:String}` wobei die Email und das Passwort schlüssel für den Benutzer sind, welche in der Datenbank abgefragt werden. Dies wird mit dem Login Button aufgerufen.
+`{tag:`register`,email:String,password:String,username:String}` wobei die Email und das Passwort Schlüssel für den Benutzer sind und der username der Anzeigename. Dies wird mit dem Registrieungs Button aufgerufen.
 
 Die Antworten vom Server sehen ähnlich aus:
 
-Antwort auf 'input' : '{tag:'input',success:boolean}' wobei der success Wert angibt ob der ausgeführte Zug erlaubt war oder nicht.
-Antwort auf 'getCurrentBoard' : '{tag:'board',started:boolean,rows:[][],gameOver:boolean,isWon:boolean,playersAlive:int}' wobei started angibt ob das Spiel gestartet ist,rows ist ein multidimensionales array welches die Steine des Feldes enhält, gameover gibt an, ob der spieler verloren hat,
+Antwort auf `input` : `{tag:`input`,success:boolean}` wobei der success Wert angibt ob der ausgeführte Zug erlaubt war oder nicht.
+Antwort auf `getCurrentBoard` : `{tag:`board`,started:boolean,rows:[][],gameOver:boolean,isWon:boolean,playersAlive:int}` wobei started angibt ob das Spiel gestartet ist,rows ist ein multidimensionales array welches die Steine des Feldes enhält, gameover gibt an, ob der spieler verloren hat,
 isWon ob der Spieler gewonnen hat und playersAlive wie viele Spieler noch im Spiel sind.
-Antwort auf 'login' : '{tag:'login',success:boolean}' wobei der success Wert angibt ob die Anmeldung erfolgreich war oder nicht.
-Antwort auf 'register' : '{tag:'register',success:boolean}' wobei der success Wert angibt ob die Regestrierung erfolgreich war oder nicht
+Antwort auf `login` : `{tag:`login`,success:boolean}` wobei der success Wert angibt ob die Anmeldung erfolgreich war oder nicht.
+Antwort auf `register` : `{tag:`register`,success:boolean}` wobei der success Wert angibt ob die Regestrierung erfolgreich war oder nicht
 
 ## Dokumentation des Interfaces
 
