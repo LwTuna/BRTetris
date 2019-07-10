@@ -85,7 +85,23 @@ Mit `Gradle test` in dem Hauptverzeichnis lassen sich alles Tests automatisch au
 
 ### Aufbau der Anwendung
 
-TODO
+Zu Beginn werden [PacketProcessors](src/main/java/PacketProcessors/PacketProcessor.java), nach der Intizialiersierung der Javalin Objektes in der [App.java](src/main/java/main/App.java) datei erstellt.  
+Diese werden zusammen mit einem Schlüssel String in eine `Map<String,PacketProcessor>` hinzugefügt. Dieser Schlüssel ist ein Tag Attribut eines JSON Objektes, welches in jeder Request des Clients enthalten ist.
+Zum Beispiel wird die Login Request  `{"tag:":"login"}` beinhalten, sodass der Server mit diesem Tag den dazugehörigen [PacketProcessors](src/main/java/PacketProcessors/PacketProcessor.java) in der Map finden kann und die dazugehörige Methode `JSONObject process(JSONObject obj)` aufrufen kann. Diese benötigt das Request JSON Objekt und liefert das result Objekt zurück.  
+`app.post("daten", ctx -> {
+           try {
+        	   ctx.result(processEvent( URLDecoder.decode(ctx.queryString(), StandardCharsets.UTF_8.toString())));
+           }catch(Exception e) {
+        	  LogUI.print(e);
+ }`
+ 
+ Diese Snippet zeigt, wie dem Javalin Objekt ein neuer PostEventHandler hinzugefügt wird, welcher das JSON Objekt decoded und damit die `String processEvent(String decode)` Methode aufruft und den String im JSON Format als result setzt.  
+ 
+ Loggt sich ein neuer Spieler ein, so wird er automatisch der [Lobby](src/main/java/game/Lobby.java) zugewiesen und es wird ein [Board](src/main/java/game/Board.java) für ihn erstellt. Außerdem erhält er eine SessionId die lokal auf dem Client zwischengespeichert wird.   Sobald die Anzahl der benötigten Spieler erreicht ist, startet das Spiel(Lobby) und es starten auch die einzelnen Boards. Sowohl die Lobby implementieren das Runnable interface, und eine Start und Stop Methode. Die Start Methode erstellt zudem einen neuen Thread und startet Diesen.
+ 
+ Der Spieler fragt in einem Interval in der [game.js](src/main/resources/public/js/game.js) sein momentanes Spielbrett von dem Server ab. Die `sendRequest(request,callback)` funktion wird in dem Fall mit `{"tag" : "getCurrentBoard","id":sessionId}` aufgerufen und der `render` funktion als Callback. Die `render` Funktion zeichnet nun das momentane Spielfeld auf dem [game.html](src/main/resources/public/game.html)(3) canvas.
+ Sollte der Spieler nun eine Taste drücken[(game.js 54-61)](src/main/resources/public/js/game.js), wird eine Request an den Server gestellt und Dieser prüft nun in der [canMove](src/main/java/game/Shape.java)(16-28) Methode, ob Diese Bewegung des [Spielsteins](src/main/java/game/Shape.java) möglich war.
+Sollte ein Spieler nun eine Reihe vervollstädigen (siehe[Board.java](src/main/java/game/Board.java)(171-180)), so wird eine neue Reihe bei den anderen Spielern erstellt.
 
 ## Dokumentation des implementierten WebAPIs
 
@@ -96,7 +112,7 @@ Das zweite ist eine Callback funktion, welche mit der Antwort vom Server als Par
 Sowohl die Serverseitigen als auch die Clientseitigen Pakete sind alle Strings im JSON Format und beinhalten alle ein `tag:String` Attribut, welches für die Indentifikation des 
 Paketes zuständig ist.
 Der Server ruft mit dem Objekt die `processEvent()` Methode auf welche eine Instanz eines Funktionalen Interfaces in der Map `Map<String,PacketProcessor> processors` mithilfe des Tag attributs sucht,
-und die Methode `JSONObject process(JSONObject obj)` des PacketProcessors mit der Request aufruft und die ensprechende Response and den Client zurä¼ckgibt.  
+und die Methode `JSONObject process(JSONObject obj)` des PacketProcessors mit der Request aufruft und die ensprechende Response and den Client zurückgibt.  
 
 Die Clientseitigen Packete sind : 
 
