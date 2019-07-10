@@ -99,9 +99,9 @@ Zum Beispiel wird die Login Request  `{"tag:":"login"}` beinhalten, sodass der S
  
  Loggt sich ein neuer Spieler ein, so wird er automatisch der [Lobby](src/main/java/game/Lobby.java) zugewiesen und es wird ein [Board](src/main/java/game/Board.java) für ihn erstellt. Außerdem erhält er eine SessionId die lokal auf dem Client zwischengespeichert wird.   Sobald die Anzahl der benötigten Spieler erreicht ist, startet das Spiel(Lobby) und es starten auch die einzelnen Boards. Sowohl die Lobby implementieren das Runnable interface, und eine Start und Stop Methode. Die Start Methode erstellt zudem einen neuen Thread und startet Diesen.
  
- Der Spieler fragt in einem Interval in der [game.js](src/main/resources/public/js/game.js) sein momentanes Spielbrett von dem Server ab. Die `sendRequest(request,callback)` funktion wird in dem Fall mit `{"tag" : "getCurrentBoard","id":sessionId}` aufgerufen und der `render` funktion als Callback. Die `render` Funktion zeichnet nun das momentane Spielfeld auf dem [game.html](src/main/resources/public/game.html)(3) canvas.
- Sollte der Spieler nun eine Taste drücken[(game.js 54-61)](src/main/resources/public/js/game.js), wird eine Request an den Server gestellt und Dieser prüft nun in der [canMove](src/main/java/game/Shape.java)(16-28) Methode, ob Diese Bewegung des [Spielsteins](src/main/java/game/Shape.java) möglich war.
-Sollte ein Spieler nun eine Reihe vervollstädigen (siehe[Board.java](src/main/java/game/Board.java)(171-180)), so wird eine neue Reihe bei den anderen Spielern erstellt.
+ Der Spieler fragt in einem Interval in der [game.js](src/main/resources/public/js/game.js) sein momentanes Spielbrett von dem Server ab. Die `sendRequest(request,callback)` funktion wird in dem Fall mit `{"tag" : "getCurrentBoard","id":sessionId}` aufgerufen und der `render` funktion als Callback. Die `render` Funktion zeichnet nun das momentane Spielfeld auf dem [game.html](src/main/resources/public/game.html) canvas.
+ Sollte der Spieler nun eine Taste drücken [game.js 54-61](src/main/resources/public/js/game.js), wird eine Request an den Server gestellt und Dieser prüft nun in der [canMove](src/main/java/game/Shape.java)(16-28) Methode, ob Diese Bewegung des [Spielsteins](src/main/java/game/Shape.java) möglich war.
+Sollte ein Spieler nun eine Reihe vervollstädigen (siehe [Board.java](src/main/java/game/Board.java)(171-180)), so wird eine neue Reihe bei den anderen Spielern erstellt.
 
 ## Dokumentation des implementierten WebAPIs
 
