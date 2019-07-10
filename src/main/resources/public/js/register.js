@@ -3,19 +3,13 @@ $(function()
         document.getElementById("registererr").style.display = 'none';
     });
 function register(){
-    var usr = document.getElementById("usr").value;
-    var pwd = document.getElementById("pwd").value;
-    var email = document.getElementById("email").value;
-    var req = {};
-    req.tag = "register";
-    req.email = email;
-    req.user = usr;
-    req.password = pwd;
+    var req = {"tag":"register","email":document.getElementById("email").value,"user":document.getElementById("usr").value,"password":document.getElementById("pwd").value};
     sendRequest(req, function(obj){
     	if (obj.succes) {
+    		alert('Succesfull registered!')
             $(".container.content").load("login.html");	
         } else {
-            alert('Login Error');
+            alert('Register Error');
         }
     });
    

@@ -1,6 +1,3 @@
-
-//Server
-
 function sendRequest(request,callback){
 	var http = new XMLHttpRequest();
 	http.open('POST', 'daten?' + encodeURI(JSON.stringify(request)));
@@ -10,7 +7,6 @@ function sendRequest(request,callback){
 			var response = JSON.parse(this.responseText);
 			callback(response);
 		}
-		
 	};
 	http.timeout = 5000;
 	http.ontimeout = function(){

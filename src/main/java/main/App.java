@@ -11,18 +11,22 @@ import io.javalin.Javalin;
 
 public class App {
 
-	private static Map<String,PacketProcessor> processors = new HashMap<String,PacketProcessor>();
-	private static Lobby lobby;
-	
-	public static void main(String[] args) {
-		Javalin app = Javalin.create()
+	private Map<String,PacketProcessor> processors = new HashMap<String,PacketProcessor>();
+	private Lobby lobby;
+	private Javalin app;
+	public App() {
+		app= Javalin.create()
                 .enableStaticFiles("/public")
                 .start(8080);
 		DatabaseManager.connect("jdbc:sqlite:sql/brtetris.db", "", "");
 		Settings.load();
 		lobby = new Lobby(Settings.lobbySize);
 		app.post("daten", ctx -> {
-            ctx.result(processEvent( URLDecoder.decode(ctx.queryString(), StandardCharsets.UTF_8.toString())));
+           try {
+        	   ctx.result(processEvent( URLDecoder.decode(ctx.queryString(), StandardCharsets.UTF_8.toString())));
+           }catch(Exception e) {
+        	  LogUI.print(e);
+           }
         });
 		
 		processors.put("input",(JSONObject obj) ->{
@@ -79,10 +83,25 @@ public class App {
 			return container;
 		});
 	}
+	
+	public static void main(String[] args) {
+		new App();
+	}
 
-	private static String processEvent(String decode) {
+	public String processEvent(String decode) {
 		JSONObject obj = new JSONObject(decode);
 		return processors.get(obj.get("tag")).process(obj).toString();
+	}
+	
+	public Map<String, PacketProcessor> getProcessors() {
+		return processors;
+	}
+	public Lobby getLobby() {
+		return lobby;
+	}
+
+	public Javalin getApp() {
+		return app;
 	}
 	
 }

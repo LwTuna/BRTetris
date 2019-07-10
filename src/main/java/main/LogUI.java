@@ -83,4 +83,10 @@ public class LogUI{
 	    frame.setVisible ( true );
 	}
 	
+	public static boolean isInitialized() {
+		return initialized;
+	}
+	public static List<String> getMessages() {
+		return messages;
+	}
 }

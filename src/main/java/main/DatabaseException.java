@@ -18,5 +18,11 @@ public class DatabaseException extends RuntimeException{
 	public DatabaseException(String message) {
 		super(message);
 	}
-
+	
+	
+	@Override
+	public void printStackTrace() {
+		super.printStackTrace();
+		LogUI.print(getMessage());
+	}
 }

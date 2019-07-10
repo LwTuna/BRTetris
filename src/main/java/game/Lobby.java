@@ -121,5 +121,13 @@ public class Lobby implements Runnable{
 			}
 		}
 	}
+
+	public int getSize() {
+		return size;
+	}
+
+	public boolean isRunning() {
+		return running;
+	}
 	
 }
