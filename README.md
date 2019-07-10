@@ -13,7 +13,7 @@ Name & Praktikumstermin: Jonas Reitz, 5240409 (Fr/1, Kr)
 
 ## Kurzbeschreibung inkl Screenshot
 
-&gt;Kurzbeschreibung
+>Kurzbeschreibung
 Für den kleinen Zeitvertreib für zwischendurch oder doch für die große Herausforderung für Profis.
 Mein Projekt "Battle Royal Tetris" ist für alle Altersgruppen gedacht. Es verbindet das moderne Battle Royal Genre bei dem mehrere Gegner jeder für sich gegeneinander spielen mit dem Klassiker Tetris.
 Das Spiel funktioniert genau wie Tetris und mit den Pfeiltasten lassen sich die Steine bewegen und auch drehen. Sobald ein Spieler eine Reihe vervollständigt erscheinen volle Reihen bei den anderen Spielern.
