@@ -6,8 +6,7 @@ $(function()
 var sessionId;
 
 function login(){
-    var req = {"tag":"login","email":document.getElementById("usr").value,"password":document.getElementById("pwd").value};
-    sendRequest(req, function(obj){
+    sendRequest({"tag":"login","email":document.getElementById("usr").value,"password":document.getElementById("pwd").value}, function(obj){
     	if (obj.succes) {
             $(".container.content").load("game.html");
             sessionId = obj.sessionId;

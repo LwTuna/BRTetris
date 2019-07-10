@@ -24,8 +24,7 @@ $( document ).ready(function() {
 });
 
 setInterval(() => {
-	var request = {"tag" : "getCurrentBoard","id":sessionId};
-	sendRequest(request, render);
+	sendRequest({"tag" : "getCurrentBoard","id":sessionId}, render);
 }, 50);
 
 function render(response){
@@ -58,8 +57,7 @@ document.body.onkeydown = function( e ) {
     if(keys[e.keyCode] != 'undefined' && (e.keyCode == 37 ||e.keyCode == 39 ||e.keyCode == 40 ||e.keyCode == 38 ||e.keyCode == 32)){
     	var obj = {"tag":"input","id":sessionId,"key":keys[e.keyCode]};
     	sendRequest(obj,function(obj){
-    		var request = {"tag":"getCurrentBoard","id":sessionId};
-    		sendRequest(request, render);
+    		sendRequest({"tag":"getCurrentBoard","id":sessionId}, render);
     	});
     }
 }
