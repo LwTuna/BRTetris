@@ -85,7 +85,7 @@ Mit `Gradle test` in dem Hauptverzeichnis lassen sich alles Tests automatisch au
 
 ### Aufbau der Anwendung
 
-<Ihre Beschreibung zum Projektaufbau>
+TODO
 
 ## Dokumentation des implementierten WebAPIs
 
@@ -115,7 +115,7 @@ Antwort auf `login` : `{tag:'login',success:boolean}` wobei der success Wert ang
 Antwort auf `register` : `{tag:'register',success:boolean}` wobei der success Wert angibt ob die Regestrierung erfolgreich war oder nicht
   
 ## Dokumentation des Interfaces
-
+TODO
 ## Technischer Anspruch (TA) und Umsetzung der Features
 
 Ich habe folgende Features verwendet. Die verlinkte Datei zeigt beispielhaft den Einsatz dieses Features in den angegebenen Zeilen im Quellcode.
@@ -125,7 +125,7 @@ Ich habe folgende Features verwendet. Die verlinkte Datei zeigt beispielhaft den
 3. Das JSON Datenformat für die Übertragung der Daten zwischen Client und Server. Dafür habe ich außederdem die Bibliothek org.json für Java genutzt, [Javascript.js](src/main/resources/public/js/Javascript.js) (1-10) [App.java](src/main/java/main/App.java) (32-84)
 4. Das Nutzen einer Datenbank für ein geeignetes Login/Registrieungssystem im Backend, [App.java](src/main/java/main/DatabaseManager.java) (19-103)
 
-
+TODO <Ihre Dokumentation zu den Features>
 ## Quellennachweis
 
 Als Quellen hab ich hauptsächlich das Gruppenprojekt genutzt und mir den von mir geschriebenen Datenbank Code kopiert und an das Projekt angepasst habe.
