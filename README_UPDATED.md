@@ -3,9 +3,9 @@
 Name & Praktikumstermin: Jonas Reitz, 5240409 (Fr/1, Kr)
 
 ## Inhaltverzeichnis
-[Kurzbeschreibung](#Kurzbeschreibung_inkl._Screenshot)  
+[Kurzbeschreibung](#Kurzbeschreibung-inkl.-Screenshot)  
 [Screenshot](#Screenshot)  
-[Beschreibung des Projektaufbaus](#Beschreibung_des_Projektaufbaus)  
+[Beschreibung des Projektaufbaus](#Beschreibung-des-Projektaufbaus)  
 [WebApi](#WebApi)  
 [Interface](#Interface)  
 [Features](#Features)  
