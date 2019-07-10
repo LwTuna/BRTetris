@@ -3,7 +3,7 @@
 Name & Praktikumstermin: Jonas Reitz, 5240409 (Fr/1, Kr)
 
 ## Inhaltverzeichnis
-[Kurzbeschreibung](#Kurzbeschreibung-inkl.-Screenshot)  
+[Kurzbeschreibung](#Kurzbeschreibung-inkl-Screenshot)  
 [Screenshot](#Screenshot)  
 [Beschreibung des Projektaufbaus](#Beschreibung-des-Projektaufbaus)  
 [WebApi](#WebApi)  
@@ -13,7 +13,7 @@ Name & Praktikumstermin: Jonas Reitz, 5240409 (Fr/1, Kr)
 [Quellen](#Quellen)  
 
 
-## Kurzbeschreibung inkl. Screenshot
+## Kurzbeschreibung inkl Screenshot
 
 >Kurzbeschreibung
 Für den kleinen Zeitvertreib für Zwischendurch oder doch für die große Herausvorderung für Profis.  
@@ -75,7 +75,7 @@ BRTetris\src\main\resources\public\js\lib\bootstrap-4.3.1-dist\css\bootstrap-reb
 ### Testdateien (TST)
 Verlinkter Dateiname | Testart | Anzahl der Tests
 ---------------------|---------|-----------------
-[JUnitTest.java](src\test\java\JUnitTest.java ) | JUnit5 | 21
+[JUnitTest.java](src/test/java/JUnitTest.java ) | JUnit5 | 21
 
 Die Tests werden wie folgt ausgeführt:
 Mit Gradle test aus dem Hauptverzeichnis lassen sich alles Tests automatisch ausführen
