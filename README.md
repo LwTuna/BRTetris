@@ -7,7 +7,7 @@ Name & Praktikumstermin: Jonas Reitz, 5240409 (Fr/1, Kr)
 [Beschreibung des Projektaufbaus](#Beschreibung-des-Projektaufbaus)  
 [WebApi](#Dokumentation-des-implementierten-WebAPIs)  
 [Interface](#Dokumentation-des-interfaces)  
-[Technischer Anspruch und Features](#Technischer-Anspruch-(TA)-und-Umsetzung-der-Features)  
+[Technischer Anspruch und Features](#Technischer-Anspruch-und-Umsetzung-der-Features)  
 [Quellen](#Quellennachweis)  
 [Sonstiges](#Sonstiges)  
 
@@ -141,7 +141,7 @@ Antwort auf `register` : `{tag:`register`,success:boolean}` wobei der success We
 Die Dokumentation des Interfaces ist in der ausführlichen [Aufbau der Anwendung](#Aufbau-der-Anwendung) mit beinhaltet, da Diese bereits den Aufbau und Ablauf des Projektes mit beinhaltet.
 Zum Aufbau der Schnittstelle wird außerdem auch in dem [Aufbau der Anwendung](#Aufbau-der-Anwendung) und natürlich in der [ Dokumentation des implementierten WebAPIs](#Dokumentation-des-implementierten-WebAPIs) hingewiesen.
 
-## Technischer Anspruch (TA) und Umsetzung der Features
+## Technischer Anspruch und Umsetzung der Features
 
 Ich habe folgende Features verwendet. Die verlinkte Datei zeigt beispielhaft den Einsatz dieses Features in den angegebenen Zeilen im Quellcode.
 
