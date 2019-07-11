@@ -90,8 +90,8 @@ try {
 ctx.result(processEvent( URLDecoder.decode(ctx.queryString(), StandardCharsets.UTF_8.toString())));  
 }catch(Exception e) {  
 LogUI.print(e);  
-} ```  
-
+}  
+ ```
 Diese Snippet zeigt, wie dem Javalin Objekt ein neuer PostEventHandler hinzugefügt wird, welcher das JSON Objekt decoded und damit die `String processEvent(String decode)` Methode aufruft und den String im JSON Format als result setzt.
 
 Zu Beginn werden außerdem auch die [Spielsteine](src/main/java/game/ShapePrefab.java) aus Textdateien im [res](res) Ordner geladen. Diese Textdateien beinhalten die mögliche Drehungen der Spielsteine in einem 4x4 Raster, wobei der Stein als 1 und Luft als 0 dargestellt wird.
