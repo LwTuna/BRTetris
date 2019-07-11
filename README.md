@@ -84,13 +84,13 @@ Mit `Gradle test` in dem Hauptverzeichnis lassen sich alles Tests automatisch au
 
 Zu Beginn werden [PacketProcessors](src/main/java/PacketProcessors/PacketProcessor.java), nach der Initialisierung der Javalin Objektes in der [App.java](src/main/java/main/App.java) Datei erstellt.
 Diese werden zusammen mit einem Schlüssel String in eine `Map<String,PacketProcessor&gt;` hinzugefügt. Dieser Schlüssel ist ein Tag Attribut eines JSON Objektes, welches in jeder Request des Clients enthalten ist.
-Zum Beispiel wird die Login Request `{"tag:":"login"}` beinhalten, sodass der Server mit diesem Tag den dazugehörigen [PacketProcessors](src/main/java/PacketProcessors/PacketProcessor.java) in der Map finden kann und die dazugehörige Methode `JSONObject process(JSONObject obj)` aufrufen kann. Diese benötigt das Request JSON Objekt und liefert das result Objekt zurück.
-`app.post("daten", ctx -&gt; {  
+Zum Beispiel wird die Login Request `{"tag:":"login"}` beinhalten, sodass der Server mit diesem Tag den dazugehörigen [PacketProcessors](src/main/java/PacketProcessors/PacketProcessor.java) in der Map finden kann und die dazugehörige Methode `JSONObject process(JSONObject obj)` aufrufen kann. Diese benötigt das Request JSON Objekt und liefert das result Objekt zurück.  
+``` app.post("daten", ctx -&gt; {  
 try {  
 ctx.result(processEvent( URLDecoder.decode(ctx.queryString(), StandardCharsets.UTF_8.toString())));  
 }catch(Exception e) {  
 LogUI.print(e);  
-}`  
+} ```  
 
 Diese Snippet zeigt, wie dem Javalin Objekt ein neuer PostEventHandler hinzugefügt wird, welcher das JSON Objekt decoded und damit die `String processEvent(String decode)` Methode aufruft und den String im JSON Format als result setzt.
 
