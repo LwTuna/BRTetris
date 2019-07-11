@@ -89,7 +89,11 @@ public class App {
 	}
 
 	public String processEvent(String decode) {
+		if(Settings.debugMode) {
+			LogUI.print(decode);
+		}
 		JSONObject obj = new JSONObject(decode);
+		
 		return processors.get(obj.get("tag")).process(obj).toString();
 	}
 	

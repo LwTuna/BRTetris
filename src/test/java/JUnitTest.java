@@ -4,14 +4,17 @@ import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
 import java.sql.SQLException;
-import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.List;
 
+import org.json.JSONObject;
+import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+import game.Lobby;
 import game.ShapePrefab;
 import main.App;
 import main.DatabaseManager;
@@ -81,11 +84,6 @@ class JUnitTest{
 		assertEquals(Settings.lobbySize, app.getLobby().getSize());
 	}
 	
-	@Test
-	void testLobbyJoin() {
-		app.getLobby().join(1);
-		assertEquals(app.getLobby().getBoards().size(), 1);
-	}
 	
 	@Test
 	void testlobbyLeave() {
@@ -98,6 +96,8 @@ class JUnitTest{
 		app.getLobby().join(1);
 		app.getLobby().join(2);
 		assertTrue(app.getLobby().isRunning());
+		app.getLobby().remove(1);
+		app.getLobby().remove(2);
 	}
 	@Test
 	void testLobbyAutoStop() {
@@ -150,5 +150,67 @@ class JUnitTest{
 		}
 		app.getLobby().join(Settings.lobbySize+1);
 		assertEquals(Settings.lobbySize, app.getLobby().getBoards().size());
+	}
+	
+	@Test
+	void testIsResultInJsonFormat() {
+		String result = app.processEvent("{\"tag\":\"register\",\"email\":\"123\",\"user\":\"123\",\"password\":\"123\"}");
+		JSONObject r = new JSONObject(result);
+		assertNotNull(r);
+	}
+	
+	@Test
+	void testRegisterPacket() {
+		String result = app.processEvent("{\"tag\":\"register\",\"email\":\"123\",\"user\":\"123\",\"password\":\"123\"}");
+		JSONObject r = new JSONObject(result);
+		assertTrue(r.getBoolean("succes"));
+	}
+	
+	@Test
+	void testLoginPacket() {
+		String result = app.processEvent("{\"tag\":\"login\",\"email\":\"123\",\"password\":\"123\"}");
+		JSONObject r = new JSONObject(result);
+		assertTrue(r.getBoolean("succes"));
+		app.getLobby().remove(r.getInt("sessionId"));
+	}
+	@Test
+	void testLoginGrantsSessionId() {
+		JSONObject result = new JSONObject(app.processEvent("{\"tag\":\"login\",\"email\":\"123\",\"password\":\"123\"}"));
+		assertNotNull(result.getInt("sessionId"));
+		app.getLobby().remove(result.getInt("sessionId"));
+	}
+	@Test
+	void testGetBoardStarted() {
+		JSONObject loginresult = new JSONObject(app.processEvent("{\"tag\":\"login\",\"email\":\"123\",\"password\":\"123\"}"));
+		
+		JSONObject boardResult = new JSONObject(app.processEvent("{\"tag\":\"getCurrentBoard\",\"id\":"+loginresult.getInt("sessionId")+"}"));
+		assertFalse(boardResult.getBoolean("started"));
+		app.getLobby().remove(loginresult.getInt("sessionId"));
+	}
+	
+	@Test
+	void testGetBoardStartedWithLobbyFull() {
+		List<Integer> ids = new ArrayList<Integer>();
+		for(int i=0;i<Settings.lobbySize;i++) {
+			JSONObject loginresult = new JSONObject(app.processEvent("{\"tag\":\"login\",\"email\":\"123\",\"password\":\"123\"}"));
+			ids.add(loginresult.getInt("sessionId"));
+		}
+		JSONObject loginResult = new JSONObject(app.processEvent("{\"tag\":\"login\",\"email\":\"123\",\"password\":\"123\"}"));
+		ids.add(loginResult.getInt("sessionId"));
+		JSONObject boardResult = new JSONObject(app.processEvent("{\"tag\":\"getCurrentBoard\",\"id\":"+loginResult.getInt("sessionId")+"}"));
+		assertFalse(boardResult.getBoolean("started"));
+		ids.forEach((id)->{app.getLobby().remove(id);});
+	}
+	@Test
+	@AfterAll
+	void testLogUI() {
+		assertNotNull(LogUI.getMessages());
+	}
+	@Test
+	void testLogUIMessageAppend() {
+		int messages = LogUI.getMessages().size();
+		LogUI.print("test");
+		assertEquals(messages+1, LogUI.getMessages().size());
+		assertEquals(LogUI.getMessages().get(LogUI.getMessages().size()-1), "test");
 	}
 }
