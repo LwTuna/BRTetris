@@ -161,8 +161,12 @@ Hiermit bestätige ich auch, das die oben genannten Quellen die einzigen sind, d
 
 ## Sonstiges
 
+### Informationen
+
 Für die LOC Zählung bitte nur den src Ordner zählen lassen und die Libraries in src/main/rescources/public/js/lib weglassen.
 Für Testzwecke lässt sich außerdem die settings.txt in dem res Ordner bearbeiten und so die Spieleranzahl in einer Lobby verändern. Falls nur ein Spieler spielen soll, bitte auch den DebugMode auf true ändern da ansonsten das Spiel direkt vorbei ist.
+
+### Planung & Kritik an der Aufgabe
 
 Des Weiteren bin ich durch die gegeben Vorschriften der LOC an meine Grenzen gestoßen, da ich für das Projekt weitere Dinge geplant hatte die durch die Beschränkung nicht umsetzbar waren.
 Ich hätte gerne ein Lobby System gemacht, in dem man sich aussuchen kann, in welche Lobby man gehen möchte, in der die Spielerzahl variiert. Außerdem sollte es eine Rangliste geben, in dem sich die Spieler anhand ihrer Siege messen können
@@ -173,6 +177,8 @@ Es hätte außerdem auch verschiedene Schwierigkeits Stufen an Bots gegeben, die
 Außerdem hätte ich gerne den Cookie Store genutzt, damit die Spieler auch nach dem Schließen der Website eingeloggt blieben.
 
 Letztenendes denke ich auch, dass so viele Tests bei vielen Projekten unnötig sind, das diese zum Beispiel bei meinen Projekt schwer umzusetzten sind und weniger Testmethoden mit mehr inhalt sinnvoller wären, als bei 1000 Zeilen 50 Tests zu machen.
+
+### Browser Support
 
 Das Spiel funktioniert super in mehreren Tabs, so das man für Testzwecke sich einfach mehrmals anmelden kann und eine Lobby fällt.
 Getestete Browser sind Chrome und Firefox, wobei andere Browser eigentlich kein Problem sein dürften da keine all zu speziellen Features eines Browsers genutzt wurden.
