@@ -178,6 +178,8 @@ Außerdem hätte ich gerne den Cookie Store genutzt, damit die Spieler auch nach
 
 Letztenendes denke ich auch, dass so viele Tests bei vielen Projekten unnötig sind, das diese zum Beispiel bei meinen Projekt schwer umzusetzten sind und weniger Testmethoden mit mehr inhalt sinnvoller wären, als bei 1000 Zeilen 50 Tests zu machen.
 
+Auch wäre es gut gewesen, wenn der Aufbau der Readme zu einem früheren Zeitpunkt verfügbar gewesen wäre, da ich nun meine komplette Readme neu schreiben musste und zum Beispiel die [Beschreibung des Projektaufbaus](#Beschreibung-des-Projektaufbaus) doch sehr Zeitaufwendig gewesen ist.
+
 ### Browser Support
 
 Das Spiel funktioniert super in mehreren Tabs, so das man für Testzwecke sich einfach mehrmals anmelden kann und eine Lobby fällt.
