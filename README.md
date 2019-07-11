@@ -75,7 +75,7 @@ Fall Sie diese Zählung wiederholen wollen entfernen Sie bitte den `src/resource
 ### Testdateien (TST)
 Verlinkter Dateiname | Testart | Anzahl der Tests
 ---------------------|---------|-----------------
-[JUnitTest.java](src/test/java/JUnitTest.java ) | JUnit5 | 21
+[JUnitTest.java](src/test/java/JUnitTest.java ) | JUnit5 | 55
 
 Die Tests werden wie folgt ausgeführt:
 Mit `Gradle test` in dem Hauptverzeichnis lassen sich alles Tests automatisch ausführen.
