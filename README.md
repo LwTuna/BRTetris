@@ -156,7 +156,7 @@ Die Features werden bereits in [Beschreibung des Projektaufbaus](#Beschreibung-d
 ## Quellennachweis
 
 Als Quellen hab ich hauptsächlich das Gruppenprojekt genutzt und mir den von mir geschriebenen Datenbank Code kopiert und an das Projekt angepasst habe.
-Des Weiteren habe ich Teile unseres CSS und HTML Codes für den Grundaufbau der Website genutzt.
+Des Weiteren habe ich Teile unseres CSS und HTML Codes in [index.html](src/main/resources/public/index.html) und [style.css](src/main/resources/public/style.css) für den Grundaufbau der Website genutzt.
 
 Hiermit bestätige ich auch, das die oben genannten Quellen die einzigen sind, die ich genutzt habe und der restliche Code alleine von mir geschrieben wurde.
 
