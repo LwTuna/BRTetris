@@ -1,6 +1,6 @@
 # Projekt: Battle Royal Tetris (Fr/2, Kr)
 
-Name & Praktikumstermin: Jonas Reitz, 5240409 (Fr/1, Kr)
+Name & Praktikumstermin: Jonas Reitz, 5240409 (Fr/2, Kr)
 
 ## Inhaltsverzeichnis
 [Kurzbeschreibung inkl Screenshot](#Kurzbeschreibung-inkl-Screenshot)  
