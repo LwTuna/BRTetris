@@ -79,6 +79,7 @@ Verlinkter Dateiname | Testart | Anzahl der Tests
 
 Die Tests werden wie folgt ausgeführt:
 Mit `Gradle test` in dem Hauptverzeichnis lassen sich alles Tests automatisch ausführen.
+Außederm in der [settings.txt](res/settings.txt) die Spieleranzahl auf 2 setzten und den DebugMode auf false.
 
 ### Aufbau der Anwendung
 
