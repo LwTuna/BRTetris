@@ -65,8 +65,9 @@ Verlinkter Dateiname | Dateiart | LOC
 [bootstrap.bundle.min.js](src/main/resources/public/js/lib/bootstrap-4.3.1-dist/js/bootstrap.bundle.min.js ) |Javascript|1
 
 Außerdem hier noch die Screenshots meiner LOC Zählung erstmal mit den Libraries:
-![Screenshot](withLib.PNG)
-und hier ohne :
+![Screenshot](withLib.PNG)  
+
+und hier ohne :  
 ![Screenshot](withoutLib.PNG)
 
 Fall Sie diese Zählung wiederholen wollen entfernen Sie bitte den `src/resources/public/js/lib` Ordner, da er die Dateien von Bootstrap und JQuery enthält und zum offline arbeiten notwendig waren.
