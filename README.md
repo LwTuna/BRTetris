@@ -85,12 +85,12 @@ Mit `Gradle test` in dem Hauptverzeichnis lassen sich alles Tests automatisch au
 Zu Beginn werden [PacketProcessors](src/main/java/PacketProcessors/PacketProcessor.java), nach der Initialisierung der Javalin Objektes in der [App.java](src/main/java/main/App.java) Datei erstellt.
 Diese werden zusammen mit einem Schlüssel String in eine `Map<String,PacketProcessor&gt;` hinzugefügt. Dieser Schlüssel ist ein Tag Attribut eines JSON Objektes, welches in jeder Request des Clients enthalten ist.
 Zum Beispiel wird die Login Request `{"tag:":"login"}` beinhalten, sodass der Server mit diesem Tag den dazugehörigen [PacketProcessors](src/main/java/PacketProcessors/PacketProcessor.java) in der Map finden kann und die dazugehörige Methode `JSONObject process(JSONObject obj)` aufrufen kann. Diese benötigt das Request JSON Objekt und liefert das result Objekt zurück.
-`app.post("daten", ctx -&gt; {
-try {
-ctx.result(processEvent( URLDecoder.decode(ctx.queryString(), StandardCharsets.UTF_8.toString())));
-}catch(Exception e) {
-LogUI.print(e);
-}`
+`app.post("daten", ctx -&gt; {  
+try {  
+ctx.result(processEvent( URLDecoder.decode(ctx.queryString(), StandardCharsets.UTF_8.toString())));  
+}catch(Exception e) {  
+LogUI.print(e);  
+}`  
 
 Diese Snippet zeigt, wie dem Javalin Objekt ein neuer PostEventHandler hinzugefügt wird, welcher das JSON Objekt decoded und damit die `String processEvent(String decode)` Methode aufruft und den String im JSON Format als result setzt.
 
@@ -124,17 +124,17 @@ und die Methode `JSONObject process(JSONObject obj)` des PacketProcessors mit de
 
 Die Clientseitigen Pakete sind :
 
-`{tag:`input`,key:String}` wobei key rotate,down,left,right oder drop sein kann. Es wird bei jedem keyPressEvent gesendet, wenn die ensprechende Taste eine Funktion hat.  
-`{tag:`getCurrentBoard`,id:int}` wobei der Integer die SessionId des users ist und so das dazugehörige Spielbrett abfragt. Dies wird in der `game.js` in der `setInterval` Funktion abgefragt.  
-`{tag:`login`,email:String,password:String}` wobei die Email und das Passwort schlüssel für den Benutzer sind, welche in der Datenbank abgefragt werden. Dies wird mit dem Login Button aufgerufen.  
-`{tag:`register`,email:String,password:String,username:String}` wobei die Email und das Passwort Schlüssel für den Benutzer sind und der username der Anzeigename. Dies wird mit dem Registrieungs Button aufgerufen.  
+`{tag:'input',key:String}` wobei key rotate,down,left,right oder drop sein kann. Es wird bei jedem keyPressEvent gesendet, wenn die ensprechende Taste eine Funktion hat.  
+`{tag:'getCurrentBoard',id:int}` wobei der Integer die SessionId des users ist und so das dazugehörige Spielbrett abfragt. Dies wird in der `game.js` in der `setInterval` Funktion abgefragt.  
+`{tag:'login',email:String,password:String}` wobei die Email und das Passwort schlüssel für den Benutzer sind, welche in der Datenbank abgefragt werden. Dies wird mit dem Login Button aufgerufen.  
+`{tag:'register',email:String,password:String,username:String}` wobei die Email und das Passwort Schlüssel für den Benutzer sind und der username der Anzeigename. Dies wird mit dem Registrieungs Button aufgerufen.  
 
 Die Antworten vom Server sehen ähnlich aus:
 
-Antwort auf `input` : `{tag:`input`,success:boolean}` wobei der success Wert angibt ob der ausgeführte Zug erlaubt war oder nicht.  
-Antwort auf `getCurrentBoard` : `{tag:`board`,started:boolean,rows:[][],gameOver:boolean,isWon:boolean,playersAlive:int}` wobei started angibt ob das Spiel gestartet ist,rows ist ein multidimensionales array welches die Steine des Feldes enhält, gameover gibt an, ob der spieler verloren hat,isWon ob der Spieler gewonnen hat und playersAlive wie viele Spieler noch im Spiel sind.  
-Antwort auf `login` : `{tag:`login`,success:boolean}` wobei der success Wert angibt ob die Anmeldung erfolgreich war oder nicht.  
-Antwort auf `register` : `{tag:`register`,success:boolean}` wobei der success Wert angibt ob die Regestrierung erfolgreich war oder nicht.
+Antwort auf `input` : '{tag:`input',success:boolean}` wobei der success Wert angibt ob der ausgeführte Zug erlaubt war oder nicht.  
+Antwort auf `getCurrentBoard` : `{tag:'board',started:boolean,rows:[][],gameOver:boolean,isWon:boolean,playersAlive:int}` wobei started angibt ob das Spiel gestartet ist,rows ist ein multidimensionales array welches die Steine des Feldes enhält, gameover gibt an, ob der spieler verloren hat,isWon ob der Spieler gewonnen hat und playersAlive wie viele Spieler noch im Spiel sind.  
+Antwort auf `login` : `{tag:'login',success:boolean}` wobei der success Wert angibt ob die Anmeldung erfolgreich war oder nicht.  
+Antwort auf `register` : `{tag:'register',success:boolean}` wobei der success Wert angibt ob die Regestrierung erfolgreich war oder nicht.
 
 ## Dokumentation des Interfaces
 
