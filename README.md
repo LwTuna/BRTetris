@@ -124,18 +124,17 @@ und die Methode `JSONObject process(JSONObject obj)` des PacketProcessors mit de
 
 Die Clientseitigen Pakete sind :
 
-`{tag:`input`,key:String}` wobei key rotate,down,left,right oder drop sein kann. Es wird bei jedem keyPressEvent gesendet, wenn die ensprechende Taste eine Funktion hat.
-`{tag:`getCurrentBoard`,id:int}` wobei der Integer die SessionId des users ist und so das dazugehörige Spielbrett abfragt. Dies wird in der `game.js` in der `setInterval` Funktion abgefragt.
-`{tag:`login`,email:String,password:String}` wobei die Email und das Passwort schlüssel für den Benutzer sind, welche in der Datenbank abgefragt werden. Dies wird mit dem Login Button aufgerufen.
-`{tag:`register`,email:String,password:String,username:String}` wobei die Email und das Passwort Schlüssel für den Benutzer sind und der username der Anzeigename. Dies wird mit dem Registrieungs Button aufgerufen.
+`{tag:`input`,key:String}` wobei key rotate,down,left,right oder drop sein kann. Es wird bei jedem keyPressEvent gesendet, wenn die ensprechende Taste eine Funktion hat.  
+`{tag:`getCurrentBoard`,id:int}` wobei der Integer die SessionId des users ist und so das dazugehörige Spielbrett abfragt. Dies wird in der `game.js` in der `setInterval` Funktion abgefragt.  
+`{tag:`login`,email:String,password:String}` wobei die Email und das Passwort schlüssel für den Benutzer sind, welche in der Datenbank abgefragt werden. Dies wird mit dem Login Button aufgerufen.  
+`{tag:`register`,email:String,password:String,username:String}` wobei die Email und das Passwort Schlüssel für den Benutzer sind und der username der Anzeigename. Dies wird mit dem Registrieungs Button aufgerufen.  
 
 Die Antworten vom Server sehen ähnlich aus:
 
-Antwort auf `input` : `{tag:`input`,success:boolean}` wobei der success Wert angibt ob der ausgeführte Zug erlaubt war oder nicht.
-Antwort auf `getCurrentBoard` : `{tag:`board`,started:boolean,rows:[][],gameOver:boolean,isWon:boolean,playersAlive:int}` wobei started angibt ob das Spiel gestartet ist,rows ist ein multidimensionales array welches die Steine des Feldes enhält, gameover gibt an, ob der spieler verloren hat,
-isWon ob der Spieler gewonnen hat und playersAlive wie viele Spieler noch im Spiel sind.
-Antwort auf `login` : `{tag:`login`,success:boolean}` wobei der success Wert angibt ob die Anmeldung erfolgreich war oder nicht.
-Antwort auf `register` : `{tag:`register`,success:boolean}` wobei der success Wert angibt ob die Regestrierung erfolgreich war oder nicht
+Antwort auf `input` : `{tag:`input`,success:boolean}` wobei der success Wert angibt ob der ausgeführte Zug erlaubt war oder nicht.  
+Antwort auf `getCurrentBoard` : `{tag:`board`,started:boolean,rows:[][],gameOver:boolean,isWon:boolean,playersAlive:int}` wobei started angibt ob das Spiel gestartet ist,rows ist ein multidimensionales array welches die Steine des Feldes enhält, gameover gibt an, ob der spieler verloren hat,isWon ob der Spieler gewonnen hat und playersAlive wie viele Spieler noch im Spiel sind.  
+Antwort auf `login` : `{tag:`login`,success:boolean}` wobei der success Wert angibt ob die Anmeldung erfolgreich war oder nicht.  
+Antwort auf `register` : `{tag:`register`,success:boolean}` wobei der success Wert angibt ob die Regestrierung erfolgreich war oder nicht.
 
 ## Dokumentation des Interfaces
 
