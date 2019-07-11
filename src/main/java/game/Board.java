@@ -8,8 +8,8 @@ import org.json.JSONArray;
 
 public class Board implements Runnable{
 
-	private final int width = 10;
-	private final int height = 20;
+	public static final int width = 10;
+	public static final int height = 20;
 	
 	
 	private Shape currentShape;
@@ -54,7 +54,7 @@ public class Board implements Runnable{
 		
 	}
 	
-	private void gameOver() {
+	public void gameOver() {
 		gameOver = true;
 		stop();
 		
@@ -162,7 +162,7 @@ public class Board implements Runnable{
 		}
 		clearRow(row);
 	}
-	private void clearRow(int row) {
+	public void clearRow(int row) {
 		for(int x=0;x<width;x++) {
 			table[x][row] = 0;
 		}
@@ -216,5 +216,11 @@ public class Board implements Runnable{
 			e.printStackTrace();
 			gameOver();
 		}
+	}
+	public int[][] getTable() {
+		return table;
+	}
+	public Shape getCurrentShape() {
+		return currentShape;
 	}
 }

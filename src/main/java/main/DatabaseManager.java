@@ -79,16 +79,9 @@ public class DatabaseManager {
 	
 	public static boolean login(String email,String password) throws SQLException {
 		ResultSet rs= executeStatement("Select * from user where email = '"+email+"' AND password = '"+password+"';");
-		
-		if(rs.next()) {
-			rs.close();
-			return true;
-		}else {
-			rs.close();
-			return false;
-		}
-		
-		
+		boolean success = rs.next();
+		rs.close();
+		return success;		
 	}
 	
 	public static boolean register(String email,String username,String password) {

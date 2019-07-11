@@ -2,9 +2,17 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertNotNull;
 import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assumptions.assumeTrue;
 
+import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.io.FileReader;
+import java.sql.Connection;
+import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 import org.json.JSONObject;
@@ -14,9 +22,11 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 import org.junit.jupiter.api.TestInstance.Lifecycle;
 
+import game.Board;
 import game.Lobby;
 import game.ShapePrefab;
 import main.App;
+import main.DatabaseException;
 import main.DatabaseManager;
 import main.LogUI;
 import main.Settings;
@@ -106,7 +116,16 @@ class JUnitTest{
 		app.getLobby().stop();
 		assertFalse(app.getLobby().isRunning());
 	}
-	
+	@Test
+	@BeforeAll
+	void testAssertions() {
+		assertTrue(true);
+	}
+	@Test
+	@BeforeAll
+	void testAssumptions() {
+		assumeTrue(true);
+	}
 	
 	@Test 
 	void testShapesLoaded() {
@@ -188,6 +207,7 @@ class JUnitTest{
 		app.getLobby().remove(loginresult.getInt("sessionId"));
 	}
 	
+	
 	@Test
 	void testGetBoardStartedWithLobbyFull() {
 		List<Integer> ids = new ArrayList<Integer>();
@@ -212,5 +232,204 @@ class JUnitTest{
 		LogUI.print("test");
 		assertEquals(messages+1, LogUI.getMessages().size());
 		assertEquals(LogUI.getMessages().get(LogUI.getMessages().size()-1), "test");
+	}
+	
+	@Test
+	void testDatabaseExceptionOnLogUi() {
+		int messages = LogUI.getMessages().size();
+		new DatabaseException("Wanted Eception on Test").printStackTrace();
+		assertEquals(messages+1, LogUI.getMessages().size());
+	}
+	@Test
+	void createTestLobby() {
+		Lobby lobby = new Lobby(2);
+		lobby.join(1);
+		lobby.join(2);
+		
+		assertTrue(lobby.isRunning());
+	}
+	@Test
+	void createTestBoards() {
+		Lobby lobby = new Lobby(2);
+		lobby.join(1);
+		lobby.join(2);
+		
+		assertTrue(lobby.getBoards().get(1).isRunning());
+	}
+	@Test
+	void testWin() {
+		Lobby lobby = new Lobby(2);
+		lobby.join(1);
+		lobby.join(2);
+		lobby.getBoards().get(1).gameOver();
+		assertEquals(1, lobby.getPlayersAlive());
+	}
+	@Test
+	void testMoveDown() {
+		Lobby lobby = new Lobby(2);
+		lobby.join(1);
+		lobby.join(2);
+		assertTrue(lobby.getBoards().get(1).move("down"));
+	}
+	
+	
+	@Test
+	void testMoveLeft() {
+		Lobby lobby = new Lobby(2);
+		lobby.join(1);
+		lobby.join(2);
+		assertTrue(lobby.getBoards().get(1).move("left"));
+	}
+	@Test
+	void testMoveRight() {
+		Lobby lobby = new Lobby(2);
+		lobby.join(1);
+		lobby.join(2);
+		assertTrue(lobby.getBoards().get(1).move("right"));
+	}
+	
+	@Test
+	void testRotate() {
+		Lobby lobby = new Lobby(2);
+		lobby.join(1);
+		lobby.join(2);
+		assertTrue(lobby.getBoards().get(1).move("rotate"));
+	}
+	@Test
+	void testBoardHeight() {
+		assertEquals(20, Board.height);
+	}
+	@Test
+	void testMoveDrop() {
+		Lobby lobby = new Lobby(2);
+		lobby.join(1);
+		lobby.join(2);
+		assertTrue(lobby.getBoards().get(1).move("drop"));
+	}
+	
+	
+	@Test
+	void testClearRow() {
+		Lobby lobby = new Lobby(2);
+		lobby.join(1);
+		lobby.join(2);
+		lobby.getBoards().get(1).clearRow(1);
+		for(int i=0;i<Board.width;i++) {
+			assertEquals(0, lobby.getBoards().get(1).getTable()[i][1]);
+		}
+	}
+	
+	@Test
+	void testBoardWidth() {
+		assertEquals(10, Board.width);
+	}
+	
+	@Test
+	void testNewShapeInCurrentShape() {
+		Lobby lobby = new Lobby(2);
+		lobby.join(1);
+		lobby.join(2);
+		lobby.getBoards().get(1).createNewShape();
+		assertTrue(lobby.getBoards().get(1).isGameOver());
+	}
+	@Test
+	void testWinResult() {
+		Lobby lobby = app.getLobby();
+		lobby.join(1);
+		lobby.join(2);
+		lobby.getBoards().get(1).win();
+		JSONObject boardResult = new JSONObject(app.processEvent("{\"tag\":\"getCurrentBoard\",\"id\":1}"));
+		assertTrue(boardResult.getBoolean("isWon"));
+		lobby.stop();
+	}
+	
+	@Test
+	void testGameOverResult() {
+		Lobby lobby = app.getLobby();
+		lobby.join(1);
+		lobby.join(2);
+		lobby.getBoards().get(1).gameOver();
+		JSONObject boardResult = new JSONObject(app.processEvent("{\"tag\":\"getCurrentBoard\",\"id\":1}"));
+		assertTrue(boardResult.getBoolean("gameOver"));
+		lobby.stop();
+	}
+	
+	@Test
+	void testDownAndNewShape() {
+		Lobby lobby = app.getLobby();
+		lobby.join(1);
+		lobby.join(2);
+		for(int i=0;i<5;i++) {
+			lobby.getBoards().get(1).move("down");
+		}
+		lobby.getBoards().get(1).createNewShape();
+		assertFalse(lobby.getBoards().get(1).isGameOver());
+	}
+	@Test
+	void testLoginUserNotCreated() {
+		try {
+			assertFalse(DatabaseManager.login("asdfaisuhdfausfhd", "uihdfasiuasfahipusdf"));
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
+	@Test
+	void testSettingsFileExists() {
+		assertTrue(new File("res/settings.txt").exists());
+	}
+	
+	@Test
+	void testAllFilesInRes() {
+		File folder = new File("res");
+		assertEquals(8, folder.listFiles().length);
+	}
+	
+	@Test
+	void testAllFilesInWebsiteRes() {
+		File folder = new File("src/main/resources/public/res");
+		assertEquals(9, folder.listFiles().length);
+	}
+	
+	@Test
+	void testOrgJsonLib() {
+		JSONObject obj = new JSONObject();
+		obj.put("test", true);
+		String asString = obj.toString();
+		assertTrue(new JSONObject(asString).getBoolean("test"));
+	}
+	@Test
+	void testSQLite() {
+		
+		try {
+			Class.forName("org.sqlite.JDBC");
+			Connection connection = DriverManager.getConnection("jdbc:sqlite:sql/brtetris.db", "", "");
+			assertNotNull(connection);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	@Test
+	void testGradleBuildMainClass() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(new File("build.gradle")));
+			List<String> lines = Arrays.asList((String[])br.lines().toArray());
+			assertTrue(lines.get(33).contains("mainClassName = 'main/App'"));
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@Test
+	void testGradleSettings() {
+		try {
+			BufferedReader br = new BufferedReader(new FileReader(new File("build.settings")));
+			List<String> lines = Arrays.asList((String[])br.lines().toArray());
+			assertTrue(lines.get(9).contains("rootProject.name = 'BRTetris'"));
+			br.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
 	}
 }
