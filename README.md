@@ -1,6 +1,6 @@
 # Projekt: Battle Royal Tetris (Fr/2, Kr)
 
-Name & Praktikumstermin: Jonas Reitz, 5240409 (Fr/1, Kr)
+Name & Praktikumstermin: Jonas Reitz, 5240409 (Fr/2, Kr)
 
 ## Inhaltsverzeichnis
 [Kurzbeschreibung inkl Screenshot](#Kurzbeschreibung-inkl-Screenshot)  
@@ -79,7 +79,10 @@ Verlinkter Dateiname | Testart | Anzahl der Tests
 
 Die Tests werden wie folgt ausgeführt:
 Mit `Gradle test` in dem Hauptverzeichnis lassen sich alles Tests automatisch ausführen.
-Außederm in der [settings.txt](res/settings.txt) die Spieleranzahl auf 2 setzten und den DebugMode auf false.
+Außerdem in der [settings.txt](res/settings.txt) die Spieleranzahl auf 2 setzten und den DebugMode auf false.
+
+Ich konnte auch viele meine Spiele Mechanik Tests nich durchführen, da diese in einer `run()` Methode eines Threads ausgeführt werden. Wenn ich die Thread.sleep() methode in den JUnit Tests benutzt habe, wurde auch der Lobby & Board Thread gestoppt, so dass ich diese Mechaniken nur teilweise testen konnte.
+
 
 ### Aufbau der Anwendung
 
