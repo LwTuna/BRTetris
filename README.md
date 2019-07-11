@@ -21,7 +21,7 @@ Wer als letztes noch im Spiel ist gewinnt!
 Um Spielen zu können muss zunächst über das Registrierungsformular ein Benutzer erstellt werden, welcher sich dann mit den entsprechend richtigen Daten im Login Menü anmelden kann.
 Man betritt direkt die Lobby und wartet nun das die entsprechende Anzahl an Spielern beitritt und das Spiel dann automatisch startet.
 
-![Screenshot](screenshot.PNG)
+![Screenshot](screenshot.png)
 
 **Hinweise**: _Die Anzahl der Spieler lässt sich über die_ `settings.txt` _in dem "/res" Ordner einstellen. Bei einem Spieler bitte_ `debugmode = true` _setzen, da ansonsten einzelne Spieler direkt gewonnen hat._
 Weitere Hinweise bei [Sonstiges](#Sonstiges)
