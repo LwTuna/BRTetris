@@ -141,9 +141,25 @@ Antwort auf `login` : `{tag:'login',success:boolean}` wobei der success Wert ang
 Antwort auf `register` : `{tag:'register',success:boolean}` wobei der success Wert angibt ob die Regestrierung erfolgreich war oder nicht.
 
 ## Dokumentation des Interfaces
+Ein Interface, welches ich genutzt habe ist [PacketProcessor.java](src/main/java/PacketProcessors/PacketProcessor.java) welches die Methode `public JSONObject process(JSONObject obj);` beinhaltet.
+Diese wird in dem Konstruktor von [App.java](src/main/java/main/App.java) mehrfach instanziiert und als Handler für die Requests des Client genutzt. Die methode gibt außerdem die Antwort and der Client zurück.
+Sie werden mit der Instanziierung in die `Map<String,PacketProcessor> processors` in [App.java](src/main/java/main/App.java) zusammen mit einem String als key eingefügt.
+Genaueres zu diesem Vorgang ist in [WebApi](#Dokumentation-des-implementierten-WebAPIs) erläutert.
 
-Die Dokumentation des Interfaces ist in der ausführlichen [Aufbau der Anwendung](#Aufbau-der-Anwendung) mit beinhaltet, da Diese bereits den Aufbau und Ablauf des Projektes mit beinhaltet.
-Zum Aufbau der Schnittstelle wird außerdem auch in dem [Aufbau der Anwendung](#Aufbau-der-Anwendung) und natürlich in der [ Dokumentation des implementierten WebAPIs](#Dokumentation-des-implementierten-WebAPIs) hingewiesen.
+Eine beispielhafte Instanzierung ist : 
+```
+processors.put("input",(JSONObject obj) ->{
+			JSONObject response = new JSONObject();
+			response.put("tag", "input");
+			try {
+				response.put("succes", lobby.getBoards().get(obj.getInt("id")).move(obj.getString("key")));
+			}catch(Exception e) {
+				e.printStackTrace();
+				response.put("succes", false);
+			}
+			return response;
+		});
+```
 
 ## Technischer Anspruch und Umsetzung der Features
 
