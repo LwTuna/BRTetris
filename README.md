@@ -161,6 +161,8 @@ processors.put("input",(JSONObject obj) ->{
 		});
 ```
 
+Vorteilhaft bei dieser Verwendung des Interfaces ist vorteilhaft, dass dieses System einfach erweiterbar ist und für mehrere und individuellen Requests geeignet ist.
+
 ## Technischer Anspruch und Umsetzung der Features
 
 Ich habe folgende Features verwendet. Die verlinkte Datei zeigt beispielhaft den Einsatz dieses Features in den angegebenen Zeilen im Quellcode.
