@@ -228,17 +228,26 @@ class JUnitTest{
 	}
 	@Test
 	void testLogUIMessageAppend() {
+		
 		int messages = LogUI.getMessages().size();
 		LogUI.print("test");
-		assertEquals(messages+1, LogUI.getMessages().size());
-		assertEquals(LogUI.getMessages().get(LogUI.getMessages().size()-1), "test");
+		if(Settings.debugMode) {
+			assertEquals(messages+1, LogUI.getMessages().size());
+			assertEquals(LogUI.getMessages().get(LogUI.getMessages().size()-1), "test");
+		}else {
+			assertEquals(messages, LogUI.getMessages().size());
+		}
 	}
 	
 	@Test
 	void testDatabaseExceptionOnLogUi() {
 		int messages = LogUI.getMessages().size();
 		new DatabaseException("Wanted Eception on Test").printStackTrace();
-		assertEquals(messages+1, LogUI.getMessages().size());
+		if(Settings.debugMode) {
+			assertEquals(messages+1, LogUI.getMessages().size());
+		}else {
+			assertEquals(messages, LogUI.getMessages().size());
+		}
 	}
 	@Test
 	void createTestLobby() {
