@@ -4,7 +4,6 @@ import java.nio.charset.StandardCharsets;
 import java.util.HashMap;
 import java.util.Map;
 import org.json.JSONObject;
-
 import PacketProcessors.PacketProcessor;
 import game.Lobby;
 import io.javalin.Javalin;
