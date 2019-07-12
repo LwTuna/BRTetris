@@ -33,6 +33,8 @@ public class LogUI{
 	 * @param message the message to print
 	 */
 	public static void print(String message) {
+		if(!Settings.debugMode)
+			return;
 		if(frame == null) {
 			initialize();
 		}
