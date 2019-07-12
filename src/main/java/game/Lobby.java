@@ -6,7 +6,14 @@ import java.util.List;
 import java.util.Map;
 
 import main.Settings;
-
+/**
+ * 
+ * @author jonas
+ * A Lobby represents a game with multiple players.
+ * It contains all the Boards and handles the logic if a player won the round or is out.
+ * It also handles the add rows code to other players when someone completes a row.
+ * The Thread inherit by this class updates the win/lose logic
+ */
 public class Lobby implements Runnable{
 
 	private final int size;

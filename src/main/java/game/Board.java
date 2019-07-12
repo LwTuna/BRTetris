@@ -5,7 +5,12 @@ import java.util.List;
 import java.util.Random;
 
 import org.json.JSONArray;
-
+/**
+ * @author jonas
+ * A Board represents a Tetris Board with it's diffrent Shapes on it.
+ * It has Thread which updates the Shapes and let them fall.
+ * It also handles the game Logic for the Board.
+ */
 public class Board implements Runnable{
 
 	public static final int width = 10;
